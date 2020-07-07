@@ -8,7 +8,7 @@ and a dividend yield of c = 1%.
 
 ![](../.gitbook/assets/image%20%2816%29.png)
 
-Need to change the 
+Need either change the time from 10 to 15 in excel or code them up. I use python to do it in here `<-- github link -->`
 
 ### Q1
 
