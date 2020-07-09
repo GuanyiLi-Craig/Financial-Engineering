@@ -112,9 +112,9 @@ $$\color{red}{83.08} = \cfrac{1}{1+\color{red}{0.0938}} \bigg[ 0.5 \cdot 89.51 +
 
 * So $$s_4 = 6.68\% \text{  where  } 77.22(1+s_4)^4 = 100$$ assuming per-period compounding.
 * Therefore $$Z_0^1, Z_0^2, Z_0^3 \text{ and } Z_0^4$$ can be calculated. 
-  * and then compute $$s_1, s_2, s_3 \text{ and } s_4$$ to obtain the term-structure of interest rates at time $$t=0$$ . 
+  * and then compute $$s_1, s_2, s_3 \text{ and } s_4$$ to obtain the **term-structure of interest rates** at time $$t=0$$ . 
 * At $$t=1$$ we will compute new ZCB prices and obtain a new term-structure
-  * model for the short-rate, $$r_t$$ , therefore defines a model for the term-structure. 
+  * model for the _short-rate,_ $$r_t$$ _, therefore defines a model for the term-structure_. 
 
 ## Words
 
