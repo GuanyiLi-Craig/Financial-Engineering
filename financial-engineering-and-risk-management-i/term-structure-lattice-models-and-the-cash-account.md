@@ -85,7 +85,36 @@ for any non-coupon paying security and any $$s>0$$
 
 ### Risk-Neutral Pricing with the Cash-Account
 
+* Risk-neutral pricing for a "coupon" paying security takes the form:
 
+$$Z_{t,j} = \cfrac{1}{1 + r_{t,j}} [q_u(Z_{t+1, j+1} + C_{t+1, j+1}) + q_d(Z_{t+1,j} + C_{t+1,j})] \\ = E_t^Q \bigg[ \cfrac{Z_{t+1} + C_{t+1}}{1+r_{t,j}} \bigg]$$ where it can be reformed as 
+
+$$\cfrac{Z_t}{B_t} = E_t^Q  \bigg[ \cfrac{C_{t+1}}{B_{t+1}} + \cfrac{Z_{t+1}}{B_{t+1}} \bigg]$$ 
+
+more generally, iterate the equation and we can get 
+
+$$\color{red}{\cfrac{Z_t}{B_t} = E_t^Q \bigg[ \displaystyle\sum_{j=t+1}^{t+s} \cfrac{C_j}{B_j} + \cfrac{Z_{t+s}}{B_{t+s}} \bigg]}$$ 
+
+This also can ensure the no-arbitrage. 
+
+### Example
+
+#### A Short-Rate Lattice
+
+![](../.gitbook/assets/image%20%2819%29.png)
+
+* The short-rate, $$r$$ , grows by a factor of $$u=1.25$$ or $$d=0.9$$ in each period
+* Suppose we have 100 at $$t=5$$ , we can compute the term-structure by pricing ZCB's of every maturity and then backing out the spot-rates for those maturities. 
+
+![](../.gitbook/assets/image%20%2820%29.png)
+
+$$\color{red}{83.08} = \cfrac{1}{1+\color{red}{0.0938}} \bigg[ 0.5 \cdot 89.51 + 0.5 \cdot 92.22 \bigg]$$ 
+
+* So $$s_4 = 6.68\% \text{  where  } 77.22(1+s_4)^4 = 100$$ assuming per-period compounding.
+* Therefore $$Z_0^1, Z_0^2, Z_0^3 \text{ and } Z_0^4$$ can be calculated. 
+  * and then compute $$s_1, s_2, s_3 \text{ and } s_4$$ to obtain the term-structure of interest rates at time $$t=0$$ . 
+* At $$t=1$$ we will compute new ZCB prices and obtain a new term-structure
+  * model for the short-rate, $$r_t$$ , therefore defines a model for the term-structure. 
 
 ## Words
 
