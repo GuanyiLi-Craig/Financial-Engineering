@@ -70,9 +70,92 @@ $$98.44 = \cfrac{1}{1+0.1055} \bigg[ \cfrac{1}{2} \cdot 107.19 + \cfrac{1}{2} \c
 * Backwards in lattice to compute $$E_0^Q[\cfrac{Z_4^6}{B_4}] = 79.83$$ 
   * Then we can apply the equation $$G_0 = \cfrac{E_0^Q[Z_4^6/B_4]}{E_0^Q[1/B_4]} = \cfrac{79.83}{0.7722} = 103.38$$ 
 
-## Bond Future
+![](../.gitbook/assets/image%20%2828%29.png)
 
+## Bond Futures
 
+### Pricing Futures Contracts
 
+* Let $$F_k$$ be the date $$k$$ price of a futures contract that expires after $$n$$ periods
+* Let $$S_k$$ denote the time $$k$$ price of the security underlying the futures contract. 
+* Then $$F_n = S_n$$ , i.e., at expiration the futures price and the underlying security price must coincide.
+* Can compute the future price at $$t=n-1$$ by recalling that anytime we enter a futures contract, the initial value of the contract is 0. 
+* Therefore the future price, $$F_{n-1}$$ , at date $$t=n-1$$ must satisfy
 
+$$\cfrac{1}{B_{n-1}} = E_{n-1}^Q\bigg[ \cfrac{F_n-F_{n-1}}{B_n} \bigg]$$ 
+
+* Since $$B_n \text{ and } F_{n-1}$$ are both known at date $$t=n-1$$ , we therefore have 
+
+$$F_{n-1} = E^Q_{n-1}[F_n]$$ 
+
+* By the same argument, we obtain 
+
+$$F_k = E_k^Q[F_{k+1}] \text{  for  } 0\leq k < n$$ 
+
+* Same as pricing future, use the law of iterated expectations to obtain
+
+$$F_0 = E^Q_0[F_n]$$ 
+
+* Since $$F_n = S_n$$ we have 
+  * holds regardless of whether or not underlying security pays coupons etc. 
+
+$$\color{red}{F_0 = E_0^Q[S_n]}$$ 
+
+* In contrast corresponding forward price, $$G_0$$ , satisfies
+
+$$\color{red}{G_0 = \cfrac{E_0^Q[S_n/B_n]}{E_0^Q[1/B_n]}}$$ 
+
+### A Futures Contract on a Coupon-Bearing Bond
+
+* Consider that futures contract written on same coupon bond as earlier forward contract Underlying coupon bond matures at time t = 6 Futures expiration at t = 4
+* Backward to calculate the lattice simply by $$F_{n-1} = E^Q_{n-1}[F_n]$$ and we can get
+
+![](../.gitbook/assets/image%20%2829%29.png)
+
+For example
+
+$$101.14 = \cfrac{1}{2} \cdot 98.44 + \cfrac{1}{2} \cdot 103.83$$ 
+
+* Note that the forward price, **103.38**, and futures price, **103.22**, are close but not equal. 
+
+## Caplets and Floorlets
+
+### Pricing a Caplet
+
+* A caplet is similar to a European call option on the interest rate, $$r_t$$ .
+  * Usually settled in arrears but they may also be settled in advance. 
+  * If maturity is $$\tau$$ and strike is $$c$$ , then payoff of a caplet \(settled in arrears\) at time $$\tau$$ is 
+
+$$(r_{\tau-1} - c) ^{+}$$ 
+
+So the caplet is a call option on the short rate prevailing\* at time $$\tau - 1$$ , settled at time $$\tau$$ . 
+
+* A floorlet is the same as a caplet except the payoff is $$(c-r_{\tau-1})^+$$ 
+* A **cap** consists of a sequence of caplets all of which have the same strike
+* A **floor** consists of a sequence of floorlets all of which have the same strike
+* Recall the short-rate lattice
+
+![](../.gitbook/assets/image%20%2827%29.png)
+
+* Suppose the expiration at t=6 and strike = 2%
+* Note that it is easier to record the time t = 6 cash flows at their time 5 predecessor nodes, and then discount them appropriately
+* So $$(r_5 - c)^+$$  at time t = 6 is worth
+
+$$\cfrac{(r_5 - c)^+}{1+r_5} \text{  at } t=5$$ 
+
+![](../.gitbook/assets/image%20%2830%29.png)
+
+* A simple calculation:
+
+$$0.015 = \cfrac{\max(0, 0.0345 - 0.02)}{1+0.0345}$$ 
+
+* Now we can work backwards in the lattice to find the price at t = 0, for example
+
+$$0.021 = \cfrac{1}{1 + 0.0394} \bigg[ \cfrac{1}{2} \cdot 0.028 + \cfrac{1}{2} \cdot 0.015 \bigg]$$ 
+
+## Words
+
+{% hint style="info" %}
+* prevail
+{% endhint %}
 
