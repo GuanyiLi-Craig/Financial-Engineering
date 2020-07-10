@@ -58,7 +58,17 @@ where $$B_4$$ is the value of the cash-account at $$t=4$$
 $$\color{red}{G_0 = \cfrac{E_0^Q[Z_4^6/B_4]}{E_0^Q[1/B_4]}}$$ 
 
 * Recall that $$E_0^Q[1/B_4]$$ is time $$t=0$$ price of a ZCB maturing at $$t=4$$ but with a face value $1. 
-  * has already calculated this to be 0.7722
+  * has already calculated this to be 0.7722 \( $$77.22/100$$ \)
+* Find ex-coupon price, $$Z_4^6$$ , of the bond at time $$t=4.$$ 
+
+![](../.gitbook/assets/image%20%2826%29.png)
+
+For example
+
+$$98.44 = \cfrac{1}{1+0.1055} \bigg[ \cfrac{1}{2} \cdot 107.19 + \cfrac{1}{2} \cdot 110.46 \bigg] \\ 116.24 = \cfrac{1}{1+0.0354} \bigg[ \cfrac{1}{2}\cdot 110 + \cfrac{1}{2} \cdot 110 \bigg] + 10$$ 
+
+* Backwards in lattice to compute $$E_0^Q[\cfrac{Z_4^6}{B_4}] = 79.83$$ 
+  * Then we can apply the equation $$G_0 = \cfrac{E_0^Q[Z_4^6/B_4]}{E_0^Q[1/B_4]} = \cfrac{79.83}{0.7722} = 103.38$$ 
 
 ## Bond Future
 
