@@ -153,9 +153,27 @@ $$0.015 = \cfrac{\max(0, 0.0345 - 0.02)}{1+0.0345}$$
 
 $$0.021 = \cfrac{1}{1 + 0.0394} \bigg[ \cfrac{1}{2} \cdot 0.028 + \cfrac{1}{2} \cdot 0.015 \bigg]$$ 
 
+## Swaps and Swaptions
+
+### Pricing Swaps
+
+* Suppose the fixed rate is 5% that expires at $$t=6$$ , and 
+  * first payment at $$t=1$$ and final payment at $$t=6$$ 
+  * payment of $$\pm (r_{i,j} - K)$$ made at time $$t = i + 1$$ if in state $$j$$ at time $$i$$ .
+* 
 ## Words
 
 {% hint style="info" %}
 * prevail
+  * be larger in number, quantity, power, status or importance
+  * be valid, applicable, or true
+  * continue to exist
+  * prove superior
+
+    _"The champion prevailed, though it was a hard fight"_
+
+  * use persuasion successfully
+
+    _"He prevailed upon her to visit his parents"_
 {% endhint %}
 
