@@ -155,6 +155,8 @@ $$0.021 = \cfrac{1}{1 + 0.0394} \bigg[ \cfrac{1}{2} \cdot 0.028 + \cfrac{1}{2} \
 
 ## Swaps and Swaptions
 
+![](../.gitbook/assets/image%20%2832%29.png)
+
 ### Pricing Swaps
 
 * Suppose the fixed rate is 5% that expires at $$t=6$$ , and 
@@ -164,6 +166,9 @@ $$0.021 = \cfrac{1}{1 + 0.0394} \bigg[ \cfrac{1}{2} \cdot 0.028 + \cfrac{1}{2} \
 * Calculate the price of the swap of the final node at $$t=6$$ . 
 * Note that it is easier to record the time $$t$$ cash flows at their time $$t-1$$ predecessor nodes, and then discount them appropriately. 
   * So $$(r_{5,5} - K) \text{ at } t = 6 \text{ is worth } \pm \cfrac{(r_{5,5}-K)}{1+r_{5,5}} = 0.0723 \text{ at } t=5$$ 
+
+![](../.gitbook/assets/image%20%2831%29.png)
+
 * An example
   * Recall that we have an universal equation for pricing spot price 
 
@@ -172,6 +177,24 @@ $$S_t = E_t^Q\bigg[ \cfrac{S_{t+1} + C_{t+1}}{1 + r_t} \bigg]$$
 where $$C_{t+1}$$ is the coupon paid at time $$t+1$$. So that 
 
 $$0.1686 = \cfrac{1}{1 + 0.0938} \bigg[ (0.0938 - 0.05) + 0.5\cdot 0.1793 + 0.5 \cdot 0.1021 \bigg]$$where $$C_{t+1} = (0.0938 - 0.05)$$ will be paid at time $$t+1$$ .
+
+### Pricing Swaptions
+
+* A swaption is an option on a swap
+* Consider a swaption on the swap of the above example
+  * assume that the option strike is 0%
+    * Not to be confused with the strike,  like 5% of above example. 
+  * and the swaption expiration is at $$t=3$$ 
+* Swaption value at expiration is therefore $$\max(0, S_3)$$ where $$S_3 \equiv $$ underlying swap price at $$t=3$$
+* Value at time $$0\leq t <3$$ computed in usual manner by working backwards in the lattice
+  * but underlying cash-flows of swap are **not** included at those times
+* Swaption price is computed by determining payoff at maturity, i.e., $$t = 3$$ and then working backwards in lattice.
+
+![](../.gitbook/assets/image%20%2833%29.png)
+
+* Example calculation
+
+$$0.0908 = \cfrac{1}{1+0.075} [0.5 \cdot 0.1286 + 0.5 \cdot 0.0665]$$ 
 
 ## Words
 
