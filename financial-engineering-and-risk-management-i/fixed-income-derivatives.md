@@ -160,7 +160,19 @@ $$0.021 = \cfrac{1}{1 + 0.0394} \bigg[ \cfrac{1}{2} \cdot 0.028 + \cfrac{1}{2} \
 * Suppose the fixed rate is 5% that expires at $$t=6$$ , and 
   * first payment at $$t=1$$ and final payment at $$t=6$$ 
   * payment of $$\pm (r_{i,j} - K)$$ made at time $$t = i + 1$$ if in state $$j$$ at time $$i$$ .
-* 
+    * + or - depends on the short or long rate
+* Calculate the price of the swap of the final node at $$t=6$$ . 
+* Note that it is easier to record the time $$t$$ cash flows at their time $$t-1$$ predecessor nodes, and then discount them appropriately. 
+  * So $$(r_{5,5} - K) \text{ at } t = 6 \text{ is worth } \pm \cfrac{(r_{5,5}-K)}{1+r_{5,5}} = 0.0723 \text{ at } t=5$$ 
+* An example
+  * Recall that we have an universal equation for pricing spot price 
+
+$$S_t = E_t^Q\bigg[ \cfrac{S_{t+1} + C_{t+1}}{1 + r_t} \bigg]$$ 
+
+where $$C_{t+1}$$ is the coupon paid at time $$t+1$$. So that 
+
+$$0.1686 = \cfrac{1}{1 + 0.0938} \bigg[ (0.0938 - 0.05) + 0.5\cdot 0.1793 + 0.5 \cdot 0.1021 \bigg]$$where $$C_{t+1} = (0.0938 - 0.05)$$ will be paid at time $$t+1$$ .
+
 ## Words
 
 {% hint style="info" %}
