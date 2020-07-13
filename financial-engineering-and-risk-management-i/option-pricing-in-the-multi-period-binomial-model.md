@@ -340,7 +340,7 @@ where under $$Q$$
 
 $$S_t = S_0\cdot e^{(r-c-\sigma^2/2)t + \sigma W_t}$$ 
 
-### Calibrating a Binomial Model
+### Calibrating\* a Binomial Model
 
 * Often specific a binomial model in terms of Black-Scholes parameters:
   * $$r,$$ the continuously compounded interest rate
@@ -399,6 +399,7 @@ where $$S_0, r, c, T, K \text{ and } C_0$$ are known to us.
 * explicitly
 * security
 * proposition
+* calibrate
 {% endhint %}
 
 
