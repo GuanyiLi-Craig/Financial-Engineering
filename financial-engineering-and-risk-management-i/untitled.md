@@ -15,7 +15,7 @@
 
 * The BDT model assumes that the interest rate at node $$N(i,j)$$ is given by
 
-$$r_{i,j} = a_i e^{b_ij}$$ 
+$$r_{i,j} = a_i e^{b_ij} \text{ apply } log \text{ we have }\\ \log(r_{i,j}) = \log(a_i) + b_ij$$ 
 
 * where
   * $$log(a_i)$$ is a drift parameter for $$log(r)$$ 
