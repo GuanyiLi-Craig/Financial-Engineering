@@ -15,7 +15,7 @@
 
 * The BDT model assumes that the interest rate at node $$N(i,j)$$ is given by
 
-$$r_{i,j} = a_i e^{b_ij} \text{ apply } log \text{ we have }\\ \log(r_{i,j}) = \log(a_i) + b_ij$$ 
+$$r_{i,j} = a_i e^{b_ij} \text{ apply } log \text{ we have }\\  \ \\ \log(r_{i,j}) = \log(a_i) + b_ij$$ 
 
 * where
   * $$log(a_i)$$ is a drift parameter for $$log(r)$$ 
@@ -26,9 +26,9 @@ $$r_{i,j} = a_i e^{b_ij} \text{ apply } log \text{ we have }\\ \log(r_{i,j}) = \
 * Have an n-period binomial lattice
 * $$(s_1, s_2, ..., s_n)$$ is the term-structure of interest rates **observed** in the market 
   * assume spot rates are compounded per period
-* Assume for now that $$b_i = b$$ is known for all $$i$$ , then
+* Assume for now that $$b_i = b$$ is **known** for all $$i$$, where $$P_{i,j}^e$$ is the elementary price on time $$i$$ state $$j$$ , we use the forward equation to calculate then
 
-$$\cfrac{1}{(1+s_i)^i} = \displaystyle\sum_{j=0}^i P_{i,j}^e \\ = \cfrac{P_{i-1,0}^e}{2\cdot(1+a_{i-1})} + \displaystyle\sum_{j=1}^{i-1} \bigg( \cfrac{P_{i-1,j}^e}{2\cdot(1+a_{i-1}e^{bj})} + \cfrac{P_{i-1,j-1}^e}{2\cdot(1+a_{i-1}e^{b(j-1)})} \bigg) + \cfrac{P_{i-1,i-1}^e}{2\cdot(1+a_{i-1}e^{b(i-1)})}$$ 
+$$\cfrac{1}{(1+s_i)^i} = \displaystyle\sum_{j=0}^i P_{i,j}^e ( = Z_0^i )\\ = \cfrac{P_{i-1,0}^e}{2\cdot(1+a_{i-1})} + \displaystyle\sum_{j=1}^{i-1} \bigg( \cfrac{P_{i-1,j}^e}{2\cdot(1+a_{i-1}e^{bj})} + \cfrac{P_{i-1,j-1}^e}{2\cdot(1+a_{i-1}e^{b(j-1)})} \bigg) + \cfrac{P_{i-1,i-1}^e}{2\cdot(1+a_{i-1}e^{b(i-1)})}$$ 
 
 
 
