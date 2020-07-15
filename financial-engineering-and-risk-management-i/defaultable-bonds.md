@@ -77,7 +77,83 @@ Pricing
 * No recovery implies that $$\bar{Z}_{i,j,1}^T \equiv0$$ in all default nodes $$(i,j,1)$$ 
 * Risk-neutral pricing:
 
-$$\bar{Z}_{i,j,0}^T = \cfrac{1}{1+r_{ij}} \bigg[ q_u (1-h_{i,j}) \bar{Z}_{i+1,j+1,0}^T + q_d(1-h_{ij})\bar{Z}_{i+1,j,0}^T \bigg] \\ + \cfrac{1}{1+r_{ij}} \bigg[ q_u h_{i,j} \bar{Z}_{i+1,j+1,1}^T + q_dh_{ij}\bar{Z}_{i+1,j,1}^T \bigg] $$ Calibrate $$h_{ij}$$ using the prices of the defaultable ZCBs. 
+$$\bar{Z}_{i,j,0}^T = \cfrac{1}{1+r_{ij}} \bigg[ q_u (1-h_{i,j}) \bar{Z}_{i+1,j+1,0}^T + q_d(1-h_{ij})\bar{Z}_{i+1,j,0}^T \bigg] \\ + \cfrac{1}{1+r_{ij}} \bigg[ q_u h_{i,j} \bar{Z}_{i+1,j+1,1}^T + q_dh_{ij}\bar{Z}_{i+1,j,1}^T \bigg] $$ 
+
+Where $$\bar{Z}_{i+1,j+1,1}^T \equiv 0 \text{ and  }\bar{Z}_{i+1,j,1}^T \equiv 0$$ . Calibrate $$h_{ij}$$ using the prices of the defaultable ZCBs. 
+
+The risk-neutral prices is 
+
+$$\bar{Z}_{i,j,0}^{T} = \cfrac{1-h_{ij}}{1+r_{ij}} \bigg[  q_u\bar{Z}_{i+1,j+1,0}^T + q_d\bar{Z}_{i+1, j ,0}^T \bigg] \\ \approx e^{-(r_{ij}+h_{ij})}E^{\bar{\Bbb{Q}}}_i[\bar{Z}_{i+1,.,.}^T]$$ 
+
+where $$\bar{\Bbb{Q}}$$ is the default-free risk-neutral probability.
+
+Price of a defaultable ZCB is set by discounting the expected value by $$(r_{ij} + h_{ij})$$ 
+
+* $$h_{ij} $$ is the 1-period **credit spread**
+* conditional probability of default $$h_{ij}$$ also called the **hazard rate**
+
+### ZCBs with Recovery
+
+Assumption: random recovery $$\tilde{R}$$ is independent of the default and interest dynamics. Let $$R=\Bbb{E}[\tilde{R}]$$ 
+
+* $$\bar{Z}_{i,j,\eta}^T=$$ price of a bond maturing on date $$T$$ in node $$(i,j,\eta)$$ after recovery
+* $$\bar{Z}_{i,j,1}^T \equiv 0$$ in all default nodes $$(i,j,1)$$ 
+
+Risk-neutral pricing
+
+$$\bar{Z}_{i,j,0}^T = \cfrac{1}{1+r_{ij}} \bigg[ q_u (1-h_{i,j}) \bar{Z}_{i+1,j+1,0}^T + q_d(1-h_{ij})\bar{Z}_{i+1,j,0}^T \bigg] \\ \quad \quad \;\;\;\; + \cfrac{1}{1+r_{ij}} \bigg[ q_u h_{i,j} R + q_dh_{ij}R \bigg] $$ 
+
+## Pricing Defaultable Bonds
+
+### State-Independent Hazard Rates
+
+**Assumption:** hazard rates $$h_{ij}$$ are state-independent, i.e. $$h_{ij} = h_i$$ 
+
+* Ensures that the default event is independent of interest rate dynamics
+* Let $$q(t)=$$ risk-neutral probability that the bond survives until date $$t$$ 
+* Then $$q(t+1) = (1-h_t)q(t) = \displaystyle\prod_{k=0}^{t} (1-h_k)$$ 
+
+Let $$I(t)$$ denote the indicator variable that bond survives up to time $$t$$, i.e.
+
+$$I(t) = \begin{cases} 1 \quad \text{Bond is not in default at time }t  \\ 0 \quad \text{Otherwise} \end{cases}$$ 
+
+Then the indicator variable for default at time $$t$$ is $$I(t-1) - I(t)$$ 
+
+From the definition of $$I(t)$$ is follows that
+
+$$\Bbb{E}_{0}^{\Bbb{Q}} [I(t)] = q(t) $$ 
+
+### Pricing Bonds with Recovery
+
+**Assumption:** Random recovery rate $$\tilde{R}$$ is independent of interest rate dynamics under $$\Bbb{Q}$$ . Let $$R = \Bbb{E}^{\Bbb{Q}}_{0}[\tilde{R}]$$ 
+
+* $$\tilde{R}$$ is the fraction of the face value $$F$$ paid on default. 
+
+Pricing details
+
+* $$t=0$$ is the current date
+* $$\{ t_1, t_2, ..., t_n \}$$ are the future dates at which coupons are paid out. 
+* The coupon is paid on date $$t_k$$ only if $$I(t_k) = 1$$ . Therefore the random cash flow associated with the coupon payment on date $$t_k$$ is $$cI(t_k)$$ 
+* The face value $$F$$ is paid on date $$t_n$$ only if $$I(t_n) = 1$$ . Therefore, the random cash flow associated with the face value payment on date $$t_n$$ is $$FI(t_n)$$ 
+* The recovery $$\tilde{R}(t_k)F$$ is paid on date $$t_k$$ is the bond defaults on date $$t_k$$ . Therefore, the random cash flow associated with recovery on date $$t_k$$ is 
+
+$$\tilde{R}(t_k)F\big(I(t_{k-1}) - I(t_k)\big)$$ 
+
+Let $$B(t)$$ denote the value of the cash account at time $$t$$ . Then the price $$\bar{P}(0)$$ of defaultable fixed coupon bond is given by
+
+$$\bar{P}(0) = \Bbb{E}^{\Bbb{Q}}_0 \bigg[ \displaystyle\sum_{k=1}^{n} \cfrac{cI(t_k)}{B(t_k)} + FI(t_n) \cfrac{1}{B(t_n)} + \displaystyle\sum_{k=1}^{n} \cfrac{\tilde{R}(t_k)F}{B(t_k)}\big( I(t_{k-1}) - I(t_k) \big) \bigg]$$ $$\quad \quad = \displaystyle\sum_{k=1}^n c\Bbb{E}^{\Bbb{Q}}_0\big[ I(t_k) \big] \cdot \Bbb{E}^{\Bbb{Q}}_0 \bigg[ \cfrac{1}{B(t_k)} \bigg] + F\Bbb{E}^{\Bbb{Q}}_0 \big[ I(t_n) \big] \cdot \Bbb{E}^{\Bbb{Q}}_0\cfrac{1}{B(t_n)} \\ \quad \quad \quad + RF\displaystyle\sum_{k=1}^n \big( \Bbb{E}^{\Bbb{Q}}_0\big[ I(t_{k-1}) \big] - \Bbb{E}^{\Bbb{Q}}_0 \big[ I(t_k) \big] \big) \cdot \Bbb{E}^{\Bbb{Q}}_0\bigg[ \cfrac{1}{B(t_k)} \bigg]$$ $$\quad \quad = \displaystyle\sum_{k=1}^n cq(t_k)Z_0^{t_k} + Fq(t_n)Z_0^{t_n} + RF\displaystyle\sum_{k=1}^n\big( q(t_{k-1}) - q(t_k) \big) Z_0^{t_k} \\ \quad \quad = \displaystyle\sum_{k=1}^n cq(t_k)d(0, t_k) + Fq(t_n)d(0, t_n) + RF\displaystyle\sum_{k=1}^n\big( q(t_{k-1}) - q(t_k) \big) d(0,t_k)$$ 
+
+### Calibrating Hazard Rates
+
+* Assume interest rate $$r$$ is deterministic and known.
+* Model price $$P(\bm{h})$$ of defaultable bond is a function $$\bm{h} = (h_0, h_1, ..., h_{n-1})$$ 
+* Observe market prices for $$m$$ bonds
+  * $$P^{mkt}_i=$$ market price for $$i^{th}$$ bond with expected recovery $$R_i, i=1,2,...,m$$ 
+* Assumption: default of all bonds induced by the same "credit event"
+* Model calibration
+  * Model price of $$i^{th}$$ bond: $$P_i(\bm{h})$$ 
+  * Pricing error: $$f(\bm{h}) = \displaystyle\sum_{i=1}^{m}\big( P^{mkt}_i - P_i(\bm{h}) \big)^2$$ 
+  * Calibration problem: $$\min_{\bm{h}\geq 0} f(\bm{h})$$ 
 
 
 
