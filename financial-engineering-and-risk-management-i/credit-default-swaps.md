@@ -120,31 +120,33 @@ _**Value of CDS to buyer = Risk-neutral value of protection - Risk-neutral value
 
 $$\delta \cdot  S \cdot N \cdot \Bbb{E}^{\Bbb{Q}}_0\bigg[ \cfrac{I(t_k)}{B(t_k)} \bigg] = \delta\cdot S \cdot N \cdot q(t_k) \cdot Z_0^{t_k} = \delta \cdot S \cdot N \cdot q(t_k) \cdot d(0,t_k)$$
 
-* Risk-neutral value of all premium payments 
+where $$I(t_k)$$ is the indicator function that entity is not in default. $$B(t_k)$$ is the cash account at time $$t_k.$$And here we assume they are independent.  
+
+* Risk-neutral value of **all premium payments** 
 
 $$\displaystyle\sum_{k=1}^n \delta \cdot S \cdot N \cdot q(t_k) \cdot d(0,t_k)$$ 
 
-* Risk-neutral value of accrued interest if default $$\tau \in (t_{k-1}, t_k]$$ 
+* Risk-neutral value of **accrued interest** if default $$\tau \in (t_{k-1}, t_k]$$ 
 
 $$\cfrac{\delta}{2} \cdot S \cdot N \cdot \Bbb{E}_0^{\Bbb{Q}} \bigg[ \cfrac{I(t_{k-1} ) - I(t_k)}{B(t_k)} \bigg] = \cfrac{\delta}{2} \cdot S \cdot N \cdot \big(q(t_{k-1}) - q(t_k)\big) Z_0^{t_k} \\  \quad \quad \quad \quad =  \cfrac{\delta}{2} \cdot S \cdot N \cdot \big(q(t_{k-1}) - q(t_k)\big) d(0,t_k)$$ 
 
-* Risk-neutral value of premium and accrued interest can approximated by 
+* Risk-neutral value of **premium and accrued interest** can approximated by 
 
 $$\delta\cdot S \cdot N \cdot \displaystyle\sum_{k=1}^n  q(t_k) d(0,t_k) + \cfrac{\delta}{2} \cdot S \cdot N \cdot \displaystyle\sum_{k=1}^n \big(q(t_{k-1}) - q(t_k)\big) d(0,t_k) \\  \quad \quad \quad \quad =  \cfrac{\delta}{2} \cdot S \cdot N \cdot \displaystyle\sum_{k=1}^n \big(q(t_{k-1}) + q(t_k)\big) d(0,t_k)$$ 
 
-* Risk-neutral present value of the protection \(contingent payment\)
+* Risk-neutral present **value of the protection** \(contingent payment\)
 
 $$(1-R) \cdot N \cdot \displaystyle\sum_{k=1}^n \Bbb{E}^{\Bbb{Q}}_0 \bigg[ \cfrac{I(t_{k-1}) - I(t_k)}{B(t_k)} \bigg] \\ \quad \quad = (1-R) \cdot N \cdot \displaystyle\sum_{k=1}^n \big( q(t_{k-1}) - q(t_k) \big) d(0, t_k)$$ 
 
-* Par spread $$S_{par} = $$ spread that makes the value of the contract equal to zero
+* **Par spread** $$S_{par} = $$ spread that makes the value of the contract equal to zero
 
 $$S_{par} = \cfrac{(1-R) \cdot \displaystyle\sum_{k=1}^n \big( q(t_{k-1}) - q(t_k) \big) d(0, t_k)}{\cfrac{\delta}{2} \cdot \displaystyle\sum_{k=1}^n \big( q(t_{k-1}) + q(t_k) \big) d(0, t_k)}$$ 
 
 * Suppose $$q(t_k) \approx (1-h)\cdot q(t_{k-1})$$ , then
 
-$$S_{par} \approx \cfrac{(1-R)\cdot h}{1 - \cfrac{h}{2}}$$ 
+$$S_{par} \approx \cfrac{(1-R)\cdot h}{1 - \cfrac{h}{2} } \approx (1-R)\cdot h$$ 
 
-Increasing in the hazard rate $$h$$ and decreasing in recovery rate $$R$$ .
+where $$h \to 0. $$ So the value increasing in the hazard rate $$h$$ and decreasing in recovery rate $$R$$ .
 
 ## Words
 
