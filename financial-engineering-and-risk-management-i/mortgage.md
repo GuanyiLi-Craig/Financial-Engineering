@@ -35,6 +35,7 @@
 We consider a standard level-payment mortgage
 
 * Initial mortgage principal is $$M_0 := M$$ 
+* We assume equal periodic payments of size B dollars.
 * 
 ## Words
 
