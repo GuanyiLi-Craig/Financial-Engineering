@@ -35,8 +35,167 @@
 We consider a standard level-payment mortgage
 
 * Initial mortgage principal is $$M_0 := M$$ 
-* We assume equal periodic payments of size B dollars.
-* 
+* We assume equal periodic payments of size $$B$$ dollars.
+* The _coupon rate_ is $$c$$ per period
+* There are a total of $$n$$ repayment periods
+* After the $$n$$ payments, the mortgage principal and interest have all been paid
+  * the mortgage is then said to be fully **amortizing**
+
+This means that each payment, $$B$$ , pays both interest and some of the principal. 
+
+If $$M_k$$ denotes the mortgage principal remaining after the $$k^{th}$$ period then
+
+$$M_k = (1+c) \cdot M_{k-1} - B \quad \text{for } k= 0,1,2,...,n$$ 
+
+with $$M_n = 0$$ 
+
+Can iterate this equation to obtain 
+
+$$M_k = (1 +c)^k \cdot M_0 - B \displaystyle\sum^{k-1}_{p=0} (1+c)^p \\ \quad = (1+c)^k \cdot M_0 - B \cdot \bigg[ \cfrac{(1+c)^k -1}{c} \bigg]$$ 
+
+But $$M_n = 0$$ and we can obtain 
+
+$$B = \cfrac{c\cdot(1+c)^nM_0}{(1+c)^n -1}$$ 
+
+Then we can get
+
+$$M_k = M_0 \cfrac{(1+c)^n - (1+c)^k}{(1+c)^n - 1}$$ 
+
+### Present Value of Level-Payment Mortgage
+
+* Suppose now that we wish to compute the present value of the mortgage assuming a deterministic world
+  * with no possibility of defaults or prepayments.
+* Then assuming a risk-free interest rate of $$r$$ per period, we obtain that the fair mortgage value as
+
+$$F_0 = \displaystyle\sum_{k=1}^{n} \cfrac{B}{(1+r)^k} \\ \quad = \cfrac{c\cdot (1+c)^n \cdot M_0}{(1+c)^n - 1} \cdot \cfrac{(1+r)^n - 1}{r\cdot(1+r)^n}$$ 
+
+Note that if $$r = c$$ then implies that $$F_0 = M_0$$, as expected
+
+In reality, $$r < c$$ , to account for the possibility of default, prepayment, servicing fees, profits, payment uncertainty etc. 
+
+### Scheduled Principal and Interest Payments
+
+Since we know $$M_{k-1}$$ we can compute the interest 
+
+$$I_k := c\cdot M_{k-1}$$ 
+
+on $$M_{k-1}$$ that would be due in the next period, i.e. period $$k.$$ 
+
+This also means we can interpret the $$k^{th}$$ payment as paying
+
+$$P_k := B - c\cdot M_{k-1}$$ 
+
+of the remaining principal, $$M_{k-1}$$ 
+
+So in any time period, $$k$$ , we can easily break down the payment $$B$$ into a scheduled principal payment, $$P_k$$ , and a scheduled interest payment, $$I_k$$ , called **principal-only** and **interest-only** MBS respectively. 
+
+## Prepayment Risk and Mortgage Pass-Throughs
+
+Many mortgage-holders in the US are allowed to **pre-pay** the mortgage principal earlier than scheduled
+
+* payments made in excess of the scheduled payments are called **prepayments**. 
+
+There are many possible reasons for prepayments: 
+
+* homeowners must prepay entire mortgage when they sell their home 
+* homeowners can refinance their mortgage at a better interest rate 
+* homeowners may default on their mortgage payments
+  * if mortgage is insured then insurer will prepay the mortgage
+*  home may be destroyed by flooding, fire etc.
+  * again insurance proceeds will prepay the mortgage. 
+
+Prepayment modeling is therefore an important feature of pricing MBS
+
+* and the value of some MBS is extremely dependent on prepayment behavior
+
+Will now consider the simplest type of MBS
+
+* the mortgage pass-through.
+
+### Pass-Throughs
+
+* In practice, mortgages are often sold on to third parties who can then pool these mortgages together to create **mortgage-backed securities \(MBS\)**. 
+* In the US the third parties are either **government sponsored agencies \(GSAs\)** such as Ginnie Mae, Freddie Mac or Fannie Mae, or other **non-agency** third parties such as commercial banks. 
+* MBS that are issued by the government-sponsored agencies are guaranteed against default
+  * not true of non-agency MBS. 
+* The modeling of MBS therefore depends on whether they are agency or non-agency MBS. 
+* The simplest type of MBS is the **pass-through** MBS where a group of mortgages are pooled together. 
+* Investors in this MBS receive monthly payments representing the interest and principal payments of the underlying mortgages.
+
+![](../.gitbook/assets/image%20%2845%29.png)
+
+* The **pass-through coupon rate**, however, is strictly less than than the average coupon rate of the underlying mortgages
+  * due to fees associated with servicing the mortgages. 
+* Will assume that our MBS are agency-issued and are therefore default-free.
+
+**Definition.** The **weighted average coupon rate \(WAC\)** is a weighted average of the coupon rates in the mortgage pool with weights equal to mortgage amounts still outstanding. 
+
+**Definition.** The **weighted average maturity \(WAM\)** is a weighted average of the remaining months to maturity of each mortgage in the mortgage pool with weights equal to the mortgage amounts still outstanding.
+
+### Payment Conventions
+
+There are important prepayment conventions that are often used by market participants when quoting yields and prices of MBS. 
+
+* but first need some definitions. 
+
+**Definition.** The **conditional prepayment rate \(CPR\)** is the annual rate at which a given mortgage pool prepays. It is expressed as a percentage of the current outstanding principal level in the underlying mortgage pool. 
+
+**Definition.** The **single-month mortality rate \(SMM\)** is the CPR converted to a monthly rate assuming monthly compounding. 
+
+The CPR and SMM are therefore related by
+
+$$\text{SMM} = 1 - (1 - \text{CPR})^{\frac{1}{12}} \\ \text{CPR} = 1 - ( 1 - \text{SMM})^{12}$$ 
+
+In practice, the CPR is stochastic and depends on the mortgage pool and other economic variables. 
+
+However, market participants often use a deterministic prepayment schedule as a mechanism to quote MBS yields and so-called option-adjusted spreads etc. 
+
+The standard benchmark is the **Public Securities Association \(PSA\)** benchmark. 
+
+The PSA benchmark assumes the following for 30 year mortgages:
+
+$$\text{CPR} = \begin{cases} 6\% \times (t/30), \text{   if  } t\leq 30 \\ 6\%, \quad \quad \quad \quad \text{if } t> 30  \end{cases}$$ 
+
+where $$t$$ is the number of months since the mortgage pool originated. 
+
+Slower or faster prepayment rates are then given as some percentage or multiple of PSA
+
+### The Average Life of an MBS
+
+Given a particular prepayment assumption the **average life** of an MBS is defined as
+
+$$\text{Average Life} = \displaystyle\sum_{k=1}^{T} \cfrac{k\cdot P_k}{12 \times TP}$$ 
+
+* where $$P_k$$ is the principal \(scheduled and projected prepayment\) paid at time $$k$$ 
+* $$TP$$ is the total principal amount
+* $$T$$ is the total number of months
+* and we divide by 12 so that average life is measured in years
+
+It is immediate that the average life decreases as the PSA speed increase. 
+
+### Mortgage Yields
+
+* In practice the price of a given MBS security is observed in the market place and from this a corresponding **yield-to-maturity** can be determined. 
+* This yield is the interest rate that will make the present value of the expected cash-flows equal to the market price. 
+* The expected cash-flows are determined based on some underlying prepayment assumption such as 100 PSA, 300 PSA etc.
+  * so any quoted yield must be with respect to some prepayment assumptions. 
+* When the yield is quoted as an annual rate based on semi-annual compounding it is called a bond-equivalent yield. 
+* Yields are clearly very limited when it comes to evaluating an MBS and indeed fixed-income securities in general. 
+* Indeed the option-adjusted-spread \(OAS\) is the market standard for quoting yields on MBS and indeed other fixed income securities with embedded options.
+
+### Prepayment Risks for Mortgage Pass-Throughs
+
+* An investor in an MBS pass-through is of course exposed to interest rate risk in that the present value of any fixed set of cash-flows decreases as interest rates increase.
+* However, a pass-through investor is also exposed to **prepayment risk**, in particular **contraction risk** and **extension risk**. 
+
+When interest rates decline prepayments tend to increase and the additional prepaid principal can only be invested at lower interest rates
+
+* this is **contraction risk.** 
+
+When interest rates increase, prepayments tend to decrease and so there is less prepaid principal that can be invested at the higher rates
+
+* this is **extension risk**
+
 ## Words
 
 {% hint style="info" %}
