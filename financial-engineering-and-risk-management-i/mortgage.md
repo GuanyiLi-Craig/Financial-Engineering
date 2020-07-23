@@ -196,6 +196,133 @@ When interest rates increase, prepayments tend to decrease and so there is less 
 
 * this is **extension risk**
 
+## Principal-Only and Interest-Only MBS
+
+Since we know $$M_{k-1}$$ we can compute the interest rate 
+
+$$I_k := c\cdot M_{k-1}$$ 
+
+on $$M_{k-1}$$ that would be due in the next period, i.e. period $$k.$$ 
+
+This also means we can interpret the $$k^{th}$$ payment as paying
+
+$$P_k := B - c\cdot M_{k-1}$$ 
+
+of the remaining principal, $$M_{k-1}$$ 
+
+Now recall our earlier expression for $$M_k$$ :
+
+$$M_k = (1+c)^k \cdot M_0 - B \bigg[ \cfrac{(1+c)^k - 1}{c} \bigg]$$ 
+
+Therefore obtain
+
+$$P_k = B -c\bigg( (1+c)^{k-1} \cdot M_0 + B\cdot\bigg[ \cfrac{(1+c)^{k-1} - 1}{c} \bigg] \bigg)\\ \quad = (B -c\cdot M_0)(1+c)^{k-1}$$ 
+
+### Principal-Only MBS
+
+The present value, $$V_0$$ , of the **principal payment stream** is therefore given by 
+
+$$V_0 = (B - c\cdot M_0) \cfrac{(1+r)^n - (1+c)^n}{(r-c)(1+r)^n}$$ 
+
+where, as before, $$r$$ , is the per-period risk-free interest rate. 
+
+Can use I'Hopital's rule to check that
+
+$$\displaystyle\lim_{c\to r} V_0 = \cfrac{n\cdot(B - r\cdot M_0)}{1+r}$$ 
+
+Now recall our earlier expression
+
+$$B = \cfrac{c\cdot (1+c)^n M_0}{(1+c)^n - 1}$$ 
+
+If we use above equation to substitute for $$B$$ then we obtain
+
+$$V_0 = \cfrac{cM_0}{(1+c)^n - 1} \times \cfrac{(1+r)^n -(1+c)^n}{(r-c)(1+r)^n}$$ 
+
+in the case $$\color{red}{r=c}$$ 
+
+$$V_0 = \cfrac{r\cdot n \cdot M_0}{(1+r)\cdot \big[ (1+r)^n  - 1\big]}$$ 
+
+It is clear that the earlier mortgage payments comprise of interest payments rather than principal payments
+
+* only later in the mortgage is this relationship reversed. 
+
+Indeed this property is reflected in the fact that
+
+$$\displaystyle\lim_{n\to \infty} V_0 = 0$$ 
+
+### Interest-Only MBS
+
+Assume there are no mortgage prepayment, the present value $$W_0$$ of the **interest payment stream** is
+
+$$W_0 = \displaystyle\sum_{k=1}^n\cfrac{I_k}{(1+r)^k}$$ 
+
+* The sum of the principal-only and interest-only streams must equal the total value of the mortgage, $$F_0 = W_0 + V_0$$, where $$F_0$$ is
+
+$$F_0 = \cfrac{c\cdot (1+c)^n \cdot M_0}{(1+c)^n - 1} \cdot \cfrac{(1+r)^n - 1}{r\cdot(1+r)^n}$$ 
+
+so that 
+
+$$W_0 = \cfrac{c \cdot M_0}{\big[(1+c)^n - 1\big] (1+r)^n} \cdot \bigg[(1+c)^n\cfrac{(1+r)^n - 1}{r} - \cfrac{(1+r)^n - (1+c)^n}{r-c}\bigg]$$ 
+
+Moreover when $$r \to c$$ it is easy to check that this reduces to 
+
+$$W_0 = M_0 - \cfrac{r\cdot n \cdot M_0}{(1+r)\big[  (1+r)^n - 1 \big]}$$ 
+
+Consider $$V_0$$ which implies that $$F_0 = M_0 \text{ when } r=c$$ 
+
+## Risks of Principal-Only and Interest-Only MBS
+
+### Duration of the Principal-Only MBS
+
+Again we assume no prepayments and consider the durations of the PO and IO cash-flow streams. 
+
+The duration of a cash-flow is a weighted average of the times at which each component of the cash-flow is received
+
+* a standard measure of the risk of a cash-flow. 
+
+It should be clear that the principal stream has a longer duration than the interest stream.
+
+If we let $$D_p$$ denote the duration of the principle stream, then it is given by
+
+$$D_p = \cfrac{1}{12\cdot V_0}\displaystyle\sum_{k=1}^n \cfrac{k\cdot P_k}{(1+r)^k} = \displaystyle\sum_{k=1}^n w_k \cdot k$$ where 
+
+$$w_k = \cfrac{1}{12\cdot V_0} \cdot \cfrac{P_k}{(1+r)^k}, \text{ where } V_0 = \displaystyle\sum_{k=1}^{n} \cfrac{P_k}{(1+r)^k}$$ 
+
+### Duration of the Interest-Only MBS
+
+Similarly, we can compute the duration, $$D_I$$ , of the interest-only stream as
+
+$$D_I = \cfrac{1}{12\cdot W_0} \cdot \displaystyle\sum_{k=1}^{n}\cfrac{I_k \cdot k}{(1+r)^k} \\ \quad = \cfrac{1}{12\cdot W_0} \cdot \displaystyle\sum_{k=1}^{n}\cfrac{(B - P_k) \cdot k}{(1+r)^k}  \\ \quad = \cfrac{1}{12\cdot W_0} \cdot \displaystyle\sum_{k=1}^{n}\cfrac{B \cdot k}{(1+r)^k} - \cfrac{V_0}{W_0}\cdot D_p$$ 
+
+### Principal-Only and Interest-Only MBS in Practice
+
+To this point we have assumed that prepayments do not occur.
+
+But this is not realistic: in practice pass-throughs do experience prepayments and the PO and IO cash-flows must reflect these prepayments correctly.
+
+But this is straightforward: the interest payment in period $$k$$ is simply, as before,
+
+$$I_k := c\cdot M_{k−1}$$ 
+
+where $$M_{k−1}$$ is the mortgage balance at the end of period $$k − 1$$ .
+
+Mk must now be calculated iteratively on a path-by-path basis as
+
+$$M_k = M_{k−1} − \text{Scheduled-Principal-Payment}_k − \text{Prepayment}_k $$ 
+
+for $$k = 1, . . . , n $$ and where $$\text{Scheduled-Principal-Payment}_k $$ is now the scheduled principal payment \(adjusted for earlier prepayments\) in period $$k$$ 
+
+### The Risks of PO and IO MBS
+
+* The risk profiles of principal-only and interest-only securities are very different   from one another.
+* The principal-only investor would like prepayments to increase.
+* The interest-only investor wants prepayments to decrease
+  * after all the IO investor only earns interest at time k on the mortgage     balance remaining at time $$k$$ .
+* In fact the IO security is that rare fixed income security whose price tends to   follow the general level of interest rates:
+  * when interest rates fall the value of the IO security tends to decrease
+  * and when interest rates increase the expected cash-flow increases due to     fewer prepayments but the discount factor decreases
+  * the net effect can be a rise or fall in value of the IO security.
+
 ## Words
 
 {% hint style="info" %}
