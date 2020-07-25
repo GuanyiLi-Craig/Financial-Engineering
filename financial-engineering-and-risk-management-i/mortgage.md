@@ -323,6 +323,93 @@ for $$k = 1, . . . , n $$ and where $$\text{Scheduled-Principal-Payment}_k $$ is
   * and when interest rates increase the expected cash-flow increases due to     fewer prepayments but the discount factor decreases
   * the net effect can be a rise or fall in value of the IO security.
 
+## Collateralized Mortgage Obligations \(CMOs\)
+
+### CMOs
+
+* Collateralized mortgage obligations \(CMOS\) are mortgage-backed securities that have been created by redirecting the cash-flows from other mortgage securities
+  * created mainly to mitigate prepayment risk and create securities that are better suited to potential investors. 
+* In practice CMOs are often created from pass-through’s but they can also be created from other MBS including, for example, principal-only MBS. 
+* There are many types of CMOs including
+  * **sequential** CMOs
+  * CMOs with **accrual bonds**
+  * CMOs with **floating-rate** and **inverse-floating-rate** tranches
+  * **planned amortization class \(PAC\)** CMOs.
+* We’ll briefly describe sequential CMOs.
+
+### Sequential CMOs
+
+* The basic structure of a sequential CMO is that there are several tranches which are ordered in such a way that they are retired sequentially. 
+* For example, the payment structure of a sequential CMO with tranches A, B, C and D might be as follows
+
+ Sequential CMO Payment Structure 
+
+* Periodic coupon interest is disbursed to each tranche on the basis of the amount of principal outstanding in the tranche at the beginning of the period. 
+* All principal payments are disbursed to tranche A until it is paid off entirely. 
+  * After tranche A has been paid off all principal payments are disbursed to tranche B until it is paid off entirely. 
+  * After tranche B has been paid off all principal payments are disbursed to tranche C until it is paid off entirely. 
+  * After tranche C has been paid off all principal payments are disbursed to tranche D until it is paid off entirely.
+
+## Pricing Mortgage-Backed-Security
+
+### Prepayment Modeling
+
+* In many respects, the prepayment model is the most important feature of any residential MBS pricing engine. 
+* Term-structure models are well understood in the financial engineering community
+  * but this is not true of prepayment models. 
+* The main problem is that there is relatively little publicly available information concerning prepayments rates
+  * so very difficult to calibrate prepayment models. 
+* One well known publicly available model is due to Richard and Roll \(1989\) 
+  * they model the conditional prepayment rate \(CPR\) whose definition we recall:
+
+**Definition**. The CPR is the rate at which a given mortgage pool prepays. It is expressed as a percentage of the **current** outstanding principal level in the underlying mortgage pool.
+
+### A Particular Prepayment Model
+
+The model of Richard and Roll \(1989\) assumes
+
+$$CPR_k = RI_k \times AGE_k \times MM_k \times BM_k$$ 
+
+where
+
+* $$RI_k$$ is the refinancing incentive, e.g.
+
+$$RI_k = 0.28 + 0.14 \tan^{-1}(-8.57 + 430\cdot (WAC - r_k(10)))$$ 
+
+where $$r_k(10)$$ is the prevailing 10-year spot rate at time $$k$$ 
+
+* $$AGE_k$$ is the seasoning multiplier, e.g.
+  * $$AGE_k = \min(1, t/30)$$ 
+* $$MM_k$$ is the monthly multiplier
+* $$BM_k$$ is the burnout multiplier, e.g.
+  * $$BM_k = 0.3 + 0.7 \cfrac{M_{k-1}}{M_0}$$ 
+  * where $$M_k$$ is the remaining principal balance at time $$k$$ .
+
+### Choosing a Term Structure Model
+
+* We also need to specify a term-structure model in order to fully specify the mortgage pricing model.
+* The term structure model will be used to: 
+  * discount all of the MBS cash-flows in the usual risk-neutral pricing framework
+  * to compute the refinancing incentive according to equation $$RI_k$$ , for example. 
+* Whatever term-structure model is used, it is important that we are able to compute the relevant interest rates **analytically**
+  * for example, $$r_{10}(k)$$ in the prepayment model of Richard and Roll. 
+* Such a model would first need to be calibrated to the term structure of interest rates in the market place as well as liquid interest rate derivatives. 
+* The actual pricing of MBS then requires Monte-Carlo simulation
+  * very computationally intensive
+  * analytic prices not available
+
+### The Financial Crisis
+
+* The so-called sub-prime mortgage market played an important role in the   financial crisis of 2008-2009.
+* Sub-prime mortgages are mortgages that are issued to home-owners with very   weak credit
+  * the true credit quality of the home-owners was often hidden
+  * the mortgages were often ARMs with so-called teaser rates
+  * very low initial mortgage rates intended to “tease” the home-owner into     accepting the mortgage.
+* The financial engineering aspect of the MBS-ABS market certainly played a role   in the crisis
+  * particularly when combined with the alphabet soup of CDO’s and     ABS-CDO’s
+  * these products are too complex and too difficult to model.
+* But there were many other causes including: moral hazard problem of mortgage   brokers, ratings agencies, bankers etc, inadequate regulation, inadequate risk   management and poor corporate governance.
+
 ## Words
 
 {% hint style="info" %}
