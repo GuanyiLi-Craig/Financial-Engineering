@@ -376,7 +376,7 @@ where
 
 $$RI_k = 0.28 + 0.14 \tan^{-1}(-8.57 + 430\cdot (WAC - r_k(10)))$$ 
 
-where $$r_k(10)$$ is the prevailing 10-year spot rate at time $$k$$ 
+where $$r_k(10)$$ is the prevailing 10-year spot rate at time $$k$$, WAC is _weighted average coupon_
 
 * $$AGE_k$$ is the seasoning multiplier, e.g.
   * $$AGE_k = \min(1, t/30)$$ 
@@ -404,6 +404,7 @@ where $$r_k(10)$$ is the prevailing 10-year spot rate at time $$k$$
 * Sub-prime mortgages are mortgages that are issued to home-owners with very   weak credit
   * the true credit quality of the home-owners was often hidden
   * the mortgages were often ARMs with so-called teaser rates
+    * Where ARM stand for Adjustable Rate Mortgage.
   * very low initial mortgage rates intended to “tease” the home-owner into     accepting the mortgage.
 * The financial engineering aspect of the MBS-ABS market certainly played a role   in the crisis
   * particularly when combined with the alphabet soup of CDO’s and     ABS-CDO’s
