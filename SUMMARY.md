@@ -23,6 +23,7 @@
 * [Credit Default Swaps](financial-engineering-and-risk-management-i/credit-default-swaps.md)
 * [Week 6 Quiz](financial-engineering-and-risk-management-i/week-6-quiz.md)
 * [Mortgage](financial-engineering-and-risk-management-i/mortgage.md)
+* [Week 7 Quiz](financial-engineering-and-risk-management-i/week-7-quiz.md)
 * [Cheat Sheet](financial-engineering-and-risk-management-i/cheat-sheet.md)
 
 ## Book 1 - Foundations of Risk Management
