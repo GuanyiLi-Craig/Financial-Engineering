@@ -56,7 +56,7 @@ $$\text{P}(A|B) = \cfrac{\text{P}(A\bigcap B)}{\text{P}(B)} \\ \quad \quad \quad
 
 where the $$A_j $$ 's form a partition of the sample-space, where
 
-$$A_i \bigcap A_j  = \text{\O}, \text{ for } i \neq j$$ and at least one $$A_i$$ must occur
+$$A_i \bigcap A_j  = \text{\O}, \text{ for } i \neq j$$ and at least one $$A_i$$ must occur.
 
 
 
