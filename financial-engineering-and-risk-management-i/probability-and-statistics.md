@@ -58,9 +58,47 @@ where the $$A_j $$ 's form a partition of the sample-space, where
 
 $$A_i \bigcap A_j  = \text{\O}, \text{ for } i \neq j$$ and at least one $$A_i$$ must occur.
 
+### Continuous Random Variables
 
+Definition. A continuous random variable, $$X$$ , has _probability density function \(PDF\)_, $$f(\cdot)$$ , if $$f(x) \geq 0$$ and for all events $$A$$ 
 
+$$\text{P}(X \in A) = \displaystyle\int_{A} f(y) dy.$$ 
 
+The CDF and PDF are related by 
 
+$$\text{F}(x) = \displaystyle\int_{-\infty}^{x} f(y) dy$$ 
 
+It is often convenient to observe that
+
+$$\text{P} \big( X \in (x - \cfrac{\epsilon}{2}, x + \cfrac{\epsilon}{2}) \big) \approx \epsilon \cdot f(x)$$ 
+
+### The Normal Distribution
+
+We say $$X$$ has a Normal distribution, or $$X \sim \text{N}(\mu, \sigma^2)$$ if 
+
+$$f(x) = \cfrac{1}{\sqrt{2\pi\sigma^2}}\text{exp}\bigg( -\cfrac{(x-\mu)^2}{2\sigma^2} \bigg)$$ 
+
+The mean and variance of the normal distribution satisfy
+
+$$\text{E}[X] = \mu\\ \text{Var}(X) = \sigma^2$$ 
+
+### The Log-Normal Distribution
+
+[&lt;-- wiki --&gt;](https://en.wikipedia.org/wiki/Log-normal_distribution)
+
+We say $$X$$ has a log-normal distribution, or $$X \sim \text{LN}(\mu, \sigma^2),$$ if 
+
+$$\text{log}(X) \sim \text{N}(\mu, \sigma^2)$$ 
+
+The mean and variance of the log-normal distribution satisfy
+
+$$\text{E} [X] = \text{exp}(\mu + \sigma^2/2) \\ \text{Var}(X) = \text{exp}(2\mu + \sigma^2) \cdot (\text{exp}(\sigma^2) - 1)$$ 
+
+The log-normal distribution plays a very important in financial application
+
+Examples
+
+![](../.gitbook/assets/image%20%2846%29.png)
+
+![](../.gitbook/assets/image%20%2847%29.png)
 
