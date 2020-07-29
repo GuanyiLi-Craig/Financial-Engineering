@@ -24,7 +24,8 @@
 * [Week 6 Quiz](financial-engineering-and-risk-management-i/week-6-quiz.md)
 * [Mortgage](financial-engineering-and-risk-management-i/mortgage.md)
 * [Week 7 Quiz](financial-engineering-and-risk-management-i/week-7-quiz.md)
-* [Probability and Statistics](financial-engineering-and-risk-management-i/probability-and-statistics.md)
+* [Basic Probability](financial-engineering-and-risk-management-i/probability-and-statistics.md)
+* [Conditional Expectations and Variances](financial-engineering-and-risk-management-i/conditional-expectations-and-variances.md)
 * [Cheat Sheet](financial-engineering-and-risk-management-i/cheat-sheet.md)
 
 ## Book 1 - Foundations of Risk Management

@@ -1,8 +1,6 @@
-# Probability and Statistics
+# Basic Probability
 
-## Review of Basic Probability
-
-### Discrete random Variable
+## Discrete random Variable
 
 **Definition.** The _cumulative distribution function \(CDF\)_, $$F(\cdot)$$ , of a random variable, $$X$$ , is defined by 
 
@@ -58,7 +56,7 @@ where the $$A_j $$ 's form a partition of the sample-space, where
 
 $$A_i \bigcap A_j  = \text{\O}, \text{ for } i \neq j$$ and at least one $$A_i$$ must occur.
 
-### Continuous Random Variables
+## Continuous Random Variables
 
 Definition. A continuous random variable, $$X$$ , has _probability density function \(PDF\)_, $$f(\cdot)$$ , if $$f(x) \geq 0$$ and for all events $$A$$ 
 
@@ -101,4 +99,6 @@ Examples
 ![](../.gitbook/assets/image%20%2846%29.png)
 
 ![](../.gitbook/assets/image%20%2847%29.png)
+
+
 
