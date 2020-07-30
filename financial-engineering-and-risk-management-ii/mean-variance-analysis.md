@@ -45,6 +45,13 @@ All parameters assumed to be constant over time.
 
 Parameters defining portfolio returns 
 
-* 
+* Expected return on a portfolio $$\bm{x} = (x_1, ..., x_d)^{\intercal}$$ 
+
+$$\mu_x = \mathbb{E}[r_x(t)] = \displaystyle\sum_{i=1}^d \mathbb{E}[r_i(t)]x_i = \displaystyle\sum_{i=1}^d \mu_i x_i$$ 
+
+* Variance of the return on portfolio $$\bm{x} :$$ 
+
+$$\sigma_x^2 = \mathbf{var}(r_x(t)) = \mathbf{var}\bigg( \displaystyle\sum_{i=1}^d r_i x_i \bigg) = \displaystyle\sum_{i=1}^d \displaystyle\sum _{j=1}^d \mathbf{cov}(r_i(t), r_j(t)) x_i x_j$$ 
+
 
 
