@@ -28,6 +28,10 @@
 * [Conditional Expectations and Variances](financial-engineering-and-risk-management-i/conditional-expectations-and-variances.md)
 * [Cheat Sheet](financial-engineering-and-risk-management-i/cheat-sheet.md)
 
+## Financial Engineering and Risk Management II
+
+* [Mean Variance Analysis](financial-engineering-and-risk-management-ii/mean-variance-analysis.md)
+
 ## Book 1 - Foundations of Risk Management
 
 * [The Building Blocks of Risk Management](book-1-foundations-of-risk-management/the-building-blocks-of-risk-management.md)
