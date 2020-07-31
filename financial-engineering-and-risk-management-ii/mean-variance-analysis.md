@@ -53,5 +53,14 @@ $$\mu_x = \mathbb{E}[r_x(t)] = \displaystyle\sum_{i=1}^d \mathbb{E}[r_i(t)]x_i =
 
 $$\sigma_x^2 = \mathbf{var}(r_x(t)) = \mathbf{var}\bigg( \displaystyle\sum_{i=1}^d r_i x_i \bigg) = \displaystyle\sum_{i=1}^d \displaystyle\sum _{j=1}^d \mathbf{cov}(r_i(t), r_j(t)) x_i x_j$$ 
 
+### Diversification Reduces Uncertainty
+
+$$d$$ assets each with $$\mu_i \equiv \mu, \sigma_i \equiv \sigma, \rho_{ij} = 0, \forall i \neq j$$ 
+
+Two different portfolios
+
+* $$\bm{x} = (1, 0,...,0)^{\top}$$ : everything invested in asset 1. 
+* $$\bm{y} = \cfrac{1}{d} (1,1,...,1)^{\top}$$ : equal investment in all assets. 
+
 
 
