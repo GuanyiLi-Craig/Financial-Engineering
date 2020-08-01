@@ -243,7 +243,9 @@ $$\bigg\{  \bigg( 1 - \displaystyle\sum_{i=1}^d x_i(\tau) , \bm{x}(\tau) \bigg) 
 
 The positions in the risky assets in the frontier portfolio
 
-$$\bm{x} = \cfrac{1}{2\tau} \mathbf{V}^{-1} \hat{\mathbf{\mu}}$$ 
+$$\mathbf{x} = \cfrac{1}{2\tau} \mathbf{V}^{-1} \hat{\mathbf{\mu}}$$ 
+
+do not add up to 1. 
 
 ## Words
 
