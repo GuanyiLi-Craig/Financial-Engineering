@@ -105,7 +105,7 @@ $$\max_x \mu_x \; \text{ s.t. }  \; \sigma_x^2 \leq \bar{\sigma} ^2 \equiv \max_
 
 $$\max_x (\mu_x - \tau\sigma_x^2) \equiv \max_x \bigg( \displaystyle\sum_{i=1}^d \mu_i x_i - \tau \bigg(   \displaystyle\sum_{i=1}^d \displaystyle\sum_{j=1}^d \sigma_{ij} x_i x_j \bigg) \bigg) \; \text{ s.t. } \; \displaystyle\sum_{i=1}^d x_i = 1$$ 
 
- $$\tau \equiv$$ risk-aversion parameter
+ $$\tau \equiv$$ risk-aversion\* parameter
 
 ## Efficient Frontier
 
@@ -207,9 +207,50 @@ The $$d-$$ asset frontier has the same structure as the 2-asset frontier.
 
 ## Mean-Variance with a Risk-Free Asset
 
+### Definition
+
+New asset: pays net return $$r_f$$ with no risk \(deterministic return\)
+
+$$x_0=$$ fraction invested in the risk-free asset. 
+
+Mean-variance problem: $$x_0 $$ does **not** contribute to risk. 
+
+$$\max \big( (r_fx_0 + \displaystyle\sum_{i=1}^d \mu_i x_i) - \tau ( \displaystyle\sum_{i=1}^d  \displaystyle\sum_{j=1}^d \sigma_{ij} x_i x_j) \big) \; \text{ s.t. } \; x_0 +  \displaystyle\sum_{i=1}^d x_i = 1$$ 
+
+Only meaningful for $$r \geq r_f$$ 
+
+Substituting $$x_0 = 1 - \displaystyle\sum_{i=1}^d x_i$$ we get
+
+$$\max \big(r_f + \displaystyle\sum_{i=1}^d (\mu_i - r_f ) x_i - \tau (\displaystyle\sum_{i=1}^d \displaystyle\sum_{j=1}^d \sigma_{ij} x_i x_j)\big)$$ 
+
+$$\hat{\mu}_i = \mu_i - r_f=$$ excess return of asset $$i$$ 
+
+### Mean-variance Optimal Portfolio
+
+Taking derivatives $$\partial x_i$$ we get
+
+$$\hat{\mu}_i - 2\tau \displaystyle\sum_{i=1}^d \sigma_{ij} x_j = 0, \;\; i = 1, ..., d$$ 
+
+Matrix formulation
+
+![](../.gitbook/assets/image%20%2852%29.png)
+
+The family of frontier portfolio as a function of $$\tau$$ 
+
+$$\bigg\{  \bigg( 1 - \displaystyle\sum_{i=1}^d x_i(\tau) , \bm{x}(\tau) \bigg) : \tau \geq 0 \bigg\}$$ 
+
+### One-Fund Theorem
+
+The positions in the risky assets in the frontier portfolio
+
+$$\bm{x} = \cfrac{1}{2\tau} \mathbf{V}^{-1} \hat{\mathbf{\mu}}$$ 
+
 ## Words
 
 {% hint style="info" %}
+* aversion
+  * a feeling of intense dislike
+  * the act of turning yourself \(or your gaze\) away
 * feasible
   * capable of being done with means at hand and circumstances as they are
 {% endhint %}
