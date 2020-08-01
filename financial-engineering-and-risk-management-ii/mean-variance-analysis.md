@@ -139,3 +139,80 @@ Explicit expression for the variance as a function of target return $$r$$ .
 
 Only the top half is efficient.
 
+### Computing the Optimal Portfolio
+
+Mean-variance portfolio selection problem
+
+$$\sigma^2(r) = \min_x(\displaystyle\sum_{i=1}^d \displaystyle\sum_{j=1}^d \sigma_{ij} x_i x_j) \; \text{ s.t. } \; \displaystyle\sum_{i=1}^d\mu_i x_i = r \; , \; \displaystyle\sum_{i=1}^d x_i = 1$$ 
+
+From the **Lagrangian** with [**Lagrange multiplier**](https://en.wikipedia.org/wiki/Lagrange_multiplier) **** $$u, v$$ 
+
+$$L = \displaystyle\sum_{i=1}^d \displaystyle\sum_{j=1}^d \sigma_{ij} x_i x_j v - v\bigg( \displaystyle\sum_{i=1}^d \mu_i x_i -r \bigg) - u \bigg( \displaystyle\sum_{i=1}^d x_i - 1\bigg)$$ 
+
+Set $$\cfrac{\partial L}{\partial x_i} = 0 \text{ for } i=1,...,d$$ gives $$d$$equations
+
+$$2 \displaystyle\sum_{i=1}^d \sigma_{ij} x_j - v\mu_i - u = 0, \text{ for all } i=1,...,d$$ 
+
+Can solve the $$d+2$$ equations in $$d + 2$$ variables: $$x_1, ..., x_d, u \text{ and } v$$ .
+
+**Theorem.** A portfolio $$\bm{x}$$ is mean-variance optimal if, and only if, it is feasible\* and there exists $$u, v$$ satisfy above equation. 
+
+Matrix formulation
+
+![](../.gitbook/assets/image%20%2850%29.png)
+
+Therefore
+
+![](../.gitbook/assets/image%20%2851%29.png)
+
+### Two Fund Theorem
+
+Fix two different target returns: $$r_1 \neq r_2$$ 
+
+Suppose
+
+* $$\bm{x}^{(1)} = \big( x_1^{(1)}, x_2^{(1)}, ..., x_d^{(1)} \big)^{\top}$$ optimal for $$r_1: $$ Lagrange multiplier $$(v_1, u_1)$$ 
+* $$\bm{x}^{(2)} = \big( x_1^{(2)}, x_2^{(2)}, ..., x_d^{(2)} \big)^{\top}$$ optimal for $$r_2: $$ Lagrange multiplier $$(v_2, u_2)$$ 
+
+Consider any other return $$r$$ 
+
+* Choose $$\beta = \cfrac{r - r_1}{r_2 - r_1}$$ 
+* Consider the position: $$\bm{y} = (1-\beta) \bm{x}^{(1)} + \beta \bm{x}^{(2)}$$ 
+
+$$\bm{y}$$ is a portfolio
+
+$$\displaystyle\sum_{i=1}^d y_i= (1-\beta) \displaystyle\sum_{i=1}^d x_i^{(1)} + \beta \displaystyle\sum_{i=1}^d x_i^{(2)} = (1- \beta) + \beta = 1$$ 
+
+$$\bm{y}$$ is feasible for target return $$r$$ 
+
+$$\displaystyle\sum_{i=1}^d y_i\mu_i= (1-\beta) \displaystyle\sum_{i=1}^d \mu_i x_i^{(1)} + \beta \displaystyle\sum_{i=1}^d \mu_i x_i^{(2)} = (1- \beta)r_1 + \beta r_2 = r$$ 
+
+Set $$v = (1-\beta ) v_1 + \beta v_2 \text{ and } u = (1 + \beta) u_1 + \beta u_2$$ 
+
+$$2  \displaystyle\sum_{j=1}^d \sigma_{ij} y_j - v \mu_i - u \\ \quad \quad = \displaystyle\sum_{j=1}^d 2 \sigma_{ij} \big( (1-\beta) x^{(1)}_j  + \beta x_j^{(2)}\big) - \mu_i \big( (1-\beta)v_1+ \beta v_2 -  \big) - \big( (1-\beta)u_1+ \beta u_2 \big) \\ \quad \quad =  (1 - \beta) \bigg( 2 \displaystyle\sum_{j=1}^d \sigma_{ij} x_j^{(1)} - v_1 \mu_i - u_1  \bigg) + \beta \bigg( 2  \displaystyle\sum_{j=1}^d \sigma_{ij} x_j^{(2)} - v_2 \mu_i - u_2 \bigg) = 0$$ 
+
+$$\bm{y}$$ is optimal for target return $$r$$ .
+
+**Theorem.** All efficient portfolios can be constructed by diversifying between any two efficient portfolios with different expected returns. 
+
+The optimal portfolio for target return $$r$$ 
+
+$$\mathbf{y}^{*} = \bigg( \cfrac{r_2 - r}{r_2 - r_1} \bigg) \mathbf{x}^{(1)} +  \bigg( \cfrac{r - r_1}{r_2 - r_1} \bigg) \mathbf{x}^{(2)} \\ \quad = \underbrace{r\bigg( \cfrac{\mathbf{x}^{(2)} - \mathbf{x}^{(1)}}{r_2 - r_1} \bigg)}_{g} + \underbrace{\bigg( \cfrac{r_2\mathbf{x}^{(1)} - r_1\mathbf{x}^{(2)}}{r_2 - r_1} \bigg)}_{h} \\ y_i^* = rg_i + h_i , \;\; i= 1, ..., d.$$ 
+
+Therefore
+
+$$\sigma^2(r) = \displaystyle\sum_{i=1}^d \displaystyle\sum_{j=1}^d \sigma_{ij} (rg_i + h_i) (rg_j + h_j) \\ \quad = r^2 \bigg( \displaystyle\sum_{i=1}^d \displaystyle\sum_{j=1}^d \sigma_{ij} g_i g_j \bigg) + 2r \bigg( \displaystyle\sum_{i=1}^d \displaystyle\sum_{j=1}^d \sigma_{ij} g_i h_j \bigg) + \bigg( \displaystyle\sum_{i=1}^d \displaystyle\sum_{j=1}^d \sigma_{ij} h_i h_j \bigg)$$ 
+
+The $$d-$$ asset frontier has the same structure as the 2-asset frontier. 
+
+## Mean-Variance with a Risk-Free Asset
+
+## Words
+
+{% hint style="info" %}
+* feasible
+  * capable of being done with means at hand and circumstances as they are
+{% endhint %}
+
+
+
