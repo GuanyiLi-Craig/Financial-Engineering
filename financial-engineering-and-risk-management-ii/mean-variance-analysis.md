@@ -10,7 +10,7 @@
 * Market portfolio
 * Capital Asset Pricing Model
 
-## Mean Variance Optimization
+## Mean Variance Optimisation
 
 ### Assets and portfolios
 
