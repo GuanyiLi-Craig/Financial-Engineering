@@ -289,6 +289,25 @@ The investment in the various risky assets are in fixed proportions ... prices/r
 
 ## Capital Asset Pricing Model
 
+### Market Portfolio
+
+**Definition.** Let $$C_i, i = 1, ..., d,$$ denote the market capitalization of the $$d$$ assets. Then the market portfolio $$\bm{x}^{(m)}$$ is defined as follows. 
+
+$$x_{i}^{(m)} = \cfrac{C_i}{\sum_{j=1}^d} C_j \;, \;i = 1, ..., d $$ 
+
+Let $$\mu_m$$ denote the **expected net rate** of return on the market portfolio, and let $$\sigma_m$$ denote the **volatility** of the market portfolio. 
+
+Suppose all investors in the market are mean-variance optimizers. Then all of them invest in the Sharpe optimal portfolio $$\bm{s}^*$$ . Let
+
+* $$w^{(k)} : $$ wealth of the k-th investor
+* $$x_0^{(k)}:$$ fraction of wealth of the k-investor in the risk-free asset. 
+
+Then
+
+$$C_i = \displaystyle\sum_k w^{(k)} (1 - x_0^{(k)}) s_i^*$$ 
+
+The market portfolio $$\bm{x}^{(m)} =$$ Sharpe optimal portfolio $$\bm{s}^*$$ .
+
 ## Words
 
 {% hint style="info" %}
