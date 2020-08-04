@@ -31,8 +31,11 @@
 ## Financial Engineering and Risk Management II
 
 * [Mean Variance Analysis](financial-engineering-and-risk-management-ii/mean-variance-analysis.md)
-* [Implementation Difficulties](financial-engineering-and-risk-management-ii/untitled.md)
 * [Week 1 Quiz](financial-engineering-and-risk-management-ii/week-1-quiz.md)
+
+---
+
+* [Implementation Difficulties](untitled.md)
 
 ## Book 1 - Foundations of Risk Management
 
