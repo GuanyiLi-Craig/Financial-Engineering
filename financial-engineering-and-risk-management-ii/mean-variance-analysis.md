@@ -243,9 +243,51 @@ $$\bigg\{  \bigg( 1 - \displaystyle\sum_{i=1}^d x_i(\tau) , \bm{x}(\tau) \bigg) 
 
 The positions in the risky assets in the frontier portfolio
 
-$$\mathbf{x} = \cfrac{1}{2\tau} \mathbf{V}^{-1} \hat{\mathbf{\mu}}$$ 
+$$\mathbf{x} = \cfrac{1}{2\tau} \mathbf{V}^{-1} \mathbf{\hat\mu}$$ 
 
 do not add up to 1. 
+
+Define a portfolio of risky assets by dividing x by the sum of its components
+
+$$s^* = \bigg( \cfrac{1}{\sum_{i=1}^d x_i} \bigg) \cdot \mathbf{x} = \bigg( \cfrac{1}{\cfrac{1}{2\tau} \sum_{i=1}^d (\mathbf(V)^{-1}\mathbf{\hat\mu})_i} \bigg) \big( \cfrac{1}{2\tau} \mathbf{V}^{-1} \mathbf{\hat\mu} \big)$$ 
+
+The portfolio $$s^*$$ is independent of $$\tau$$ . Since $$\displaystyle\sum_{i=1}^d x_i = 1-x_0 , \; \bm{x} = (1-x_0) \cdot \bm{s}^*$$ 
+
+Family of frontier portfolios $$= \{ (x_0, (1- x_0) \cdot \bm{s}^*) : x_0 \in R \}$$ 
+
+**Theorem.**  All efficient portfolios in a market with a risk-free asset can be constructed by diversifying between the risk-free asset and the single portfolio $$\bm{s}^*$$ .
+
+### Efficient Frontier with Risk-Free Asset
+
+Return and risk of portfolio $$\bm{s}^*$$ :
+
+$$\text{Return : } \mu_s^* = \displaystyle\sum_{i=1}^d \mu_i s_i^* \\ \text{Risk : } \sigma_x^* = \sqrt{\displaystyle\sum_{i=1}^d \displaystyle\sum_{j=1}^i \sigma_{ij}^2 s_i^* s_j^*}$$ 
+
+Return on a generic frontier portfolio: $$x_0$$ in risk-free and $$(1-x_0), \bm{s}^*$$ 
+
+$$\mu_x = x_0 r_f + (1+x_0)\mu_s^* \\ \sigma_x = (1-x_0) \sigma_s^*$$ 
+
+![](../.gitbook/assets/image%20%2855%29.png)
+
+![](../.gitbook/assets/image%20%2856%29.png)
+
+The portfolio $$\bm{s}^*$$ maximizes the angle $$\theta$$ or equivalently
+
+$$\tan(\theta) = \cfrac{ \sum_{i=1}^d \mu_i x_i - r_f }{ \sqrt{\sum_{i=1}^d \sum_{j=1}^d \sigma_{ij} x_i x_j}} = \cfrac{\text{expected excess return}}{\text{volatility}}$$ 
+
+### Sharpe Ratio
+
+**Definition.** The **Sharpe ratio** of a portfolio or an asset is the ratio of the expected excess return to the volatility. The **Sharpe optimal portfolio** is a portfolio that maximizes the Sharpe ratio.
+
+The portfolio $$\bm{s}^*$$ is a Sharpe optimal portfolio
+
+$$\mathbf{s}^* = \displaystyle\arg\max_{\{ x: \sum_{i=1}^d x_i = 1 \}} \bigg\{ \cfrac{\mu_x - r_f}{\sigma_x} \bigg\}$$ 
+
+Investors diversify between the risk-free asset and the Sharpe optimal portfolio. 
+
+The investment in the various risky assets are in fixed proportions ... prices/returns should be correlated! This insight leads to the Capital Asset Pricing Model.
+
+## Capital Asset Pricing Model
 
 ## Words
 
