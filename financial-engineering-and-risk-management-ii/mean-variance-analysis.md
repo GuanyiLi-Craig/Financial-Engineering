@@ -355,8 +355,60 @@ $$(r_j - r_f) = \alpha + \beta (r_m  - r_f) + \epsilon_j$$
 Parameter estimates
 
 * coefficient $$\beta_j = \cfrac{\mathbf{cov}(r_j - r_f, r_m - r_f)}{\mathbf{var}(r_m - r_f)} = \cfrac{\sigma_{jm}}{\sigma_m^2}$$ 
+* intercept $$\alpha_j = (\mathbb{E}[r_j] - r_j) - \beta (\mathbb{E}[r_m] - r_f) =(\mu_j - r_f) - \beta(\mu_m - r_f)$$ 
+* residuals $$\epsilon_j$$ and $$(r_m - r_f)$$ are uncorrelated, i.e. $$\mathbf{cor}(\epsilon_j, r_m - r_f) = 0$$ 
+* **CAPM**  implies that $$\alpha_j = 0$$ for all assets. 
+* **Effective relation** : $$r_j -r_f = \beta_j (r_m -r_f) + \epsilon_j$$ 
 
+Decomposition of risk
 
+$$\mathbf{var}(r_j - r_f) = \beta^2_j \cdot \mathbf{var} (r_m - r_f ) + \mathbf{var}(\epsilon) \\ \sigma_j^2 = \underbrace{\beta_j^2\sigma_m^2}_{\text{market risk}} + \underbrace{\mathbf{var}(\epsilon)}_{\text{residual risk}}$$ 
+
+Only compensated for taking on market risk and not residual risk.
+
+Plot of the historical returns on an asset vs $$r_f + \beta(\mu_m - r_f)$$ 
+
+![](../.gitbook/assets/image%20%2858%29.png)
+
+The assets are labeled in the order they appears in the spreadsheet. 
+
+All assets should lie on the security line if CAPM holds.
+
+### Assumptions Underlying CAPM
+
+* All investors have identical information about the uncertain returns.
+* All investors are mean-variance optimizers \(or the returns are Normal\)
+* The markets are in equilibrium.
+
+Leveraging deviations from the security market line
+
+* Jensen’s index or alpha
+
+$$\alpha = (\hat{\mu}_j - r_j) - \beta_j (\hat{\mu}_m - r_j)$$ 
+
+hold long if possible, short otherwise
+
+* Sharpe ratio of a stock
+
+$$s_j = \cfrac{\hat{\mu}_j - r_f}{\hat{\sigma}_j}$$ 
+
+hold long if $$> m_{MCM}$$ , short otherwise. 
+
+### CAPM as a Pricing Formula
+
+Suppose the payoff from an investment in 1yr is X. What is the fair price for this investment.
+
+Let $$r_X = \cfrac{X}{P} - 1$$ denote the net rate of return on $$X$$ . The beta of $$X$$ is given by
+
+$$\beta_X = \cfrac{\mathbf{cov}(r_X, r_m)}{\sigma_m^2} = \cfrac{1}{P} \cdot \cfrac{\mathbf{cov}(X, r_m)}{\sigma_m^2}$$ 
+
+Suppose CAPM holds. Then $$\mu_X = \mathbb{E}[r_X]$$ must lie on the security market line, i.e.
+
+$$\mu_X = r_f + \beta_X \cdot (r_m - r_f) \\ \cfrac{\mathbb{E}[X]}{P} - 1 = r_f + \cfrac{1}{P} \cdot \cfrac{\mathbf{cov}(X, r_m)}{\mathbf{var}(r_m)} \cdot (\mu_m - r_f)$$ 
+
+Rearranging terms:
+
+$$P = \cfrac{\mathbb{E}[X]}{1+r_f} - \cfrac{\mathbf{cov}(X, r_m)}{(1+r_f) \cdot \mathbf{var}(r_m)} \cdot (\mu_m - r_f)$$ 
 
 ## Words
 
