@@ -93,7 +93,7 @@ def portfolioVolatility(weights, covarianceMatrix):
         volatility (float): The net volatility of the given assets for the given weights
     """
     volatility = np.sqrt(weights.T @ covarianceMatrix @ weights)
-    return volatility.item((0,0))
+    return volatility
 
 class Lattice(ABC):
     """
@@ -960,10 +960,10 @@ class MeanVarianceReturn(object):
         if self.x is None:
             return -1
         return portfolioReturn(self.x, self.mu)
-    
+
     def getReturnVolatiltiy(self, weights):
         """
-        Returns the return and risk in terms of volatility 
+        Returns the return and risk in terms of volatility
         for the given assignemt of weights
         Parameters
         ----------
@@ -977,7 +977,24 @@ class MeanVarianceReturn(object):
         vol = portfolioVolatility(weights, self.covariance)
 
         return (ret, vol)
-    
+
+    def getReturnVolatiltiyWithRiskFree(self, weights, riskFreeRate):
+        """
+        Returns the return and risk in terms of volatility
+        for the given assignemt of weights
+        Parameters
+        ----------
+        weights (pd.Series): The weights assigned to different asset in the portfolio.
+        Returns
+        -------
+        (float, float): A tuple representing the return and colatility respectively.
+        """
+        length = self.mu.size
+        ret = portfolioReturn(weights[:length], self.mu) + riskFreeRate * weights.item(length)
+        vol = portfolioVolatility(weights[:length], self.covariance)
+
+        return (ret, vol)
+
     def getCapitalMarketLine(self, riskFreeRate=0.0):
         """
         Returns the parameters of the capital market line.
@@ -997,7 +1014,7 @@ class MeanVarianceReturn(object):
         yIntercept = riskFreeRate
 
         return (slope, yIntercept)
-    
+
     def getMaxReturnCapitalMarketLine(self, sigma, riskFreeRate=0.0):
         """
         The maximum return earned by the captial market line model
@@ -1056,35 +1073,35 @@ class MeanVarianceReturn(object):
         )
 
         return weights.x
-    
+
     def globalMinVariance(self):
         """
-        Returns the weights corresponding to the global minimum variance portfolio. 
+        Returns the weights corresponding to the global minimum variance portfolio.
         The weights only depends on covariance matrix.
         Returns
         -------
-        weights (up.array): The optimal weight assignment corresponding to the 
-                            global minimum variance portfolio. 
+        weights (up.array): The optimal weight assignment corresponding to the
+                            global minimum variance portfolio.
         """
-        
+
         weights = self.maxSharpeRatio(0.0, useExpectedReturn=False)
-        
+
         return weights
-    
+
     def maxSharpeRatio(self, riskFreeRate = 0.0, useExpectedReturn=True):
         """
-        Returns the weights corresponding to the maximum sharpe ratio 
+        Returns the weights corresponding to the maximum sharpe ratio
         portfolio.
         Parameters
         ----------
         riskFreeRate (float): The risk free rate of return. Defaults to 0.0.
-        useExpectedReturn (bool): Uses the expected return attribute if set to true. 
-                                  Assumes equal expected returns and gives weights 
+        useExpectedReturn (bool): Uses the expected return attribute if set to true.
+                                  Assumes equal expected returns and gives weights
                                   for global minimum variance if set False.
-                                  Defaults to True. 
+                                  Defaults to True.
         Returns
         -------
-        weight (np.array): The optimal weight assignment that minimizes the 
+        weight (np.array): The optimal weight assignment that minimizes the
                            volatility for the given set of expected returns.
         """
 
@@ -1128,7 +1145,62 @@ class MeanVarianceReturn(object):
             bounds=bounds,
         )
         return weights.x
-    
+
+    def maxReturnWithRiskless(self, riskFreeRate = 0.0, volatilityUpperLimit = 100.0):
+        """
+        Returns the weights corresponding to the maximum sharpe ratio
+        portfolio.
+        Parameters
+        ----------
+        riskFreeRate (float): The risk free rate of return. Defaults to 0.0.
+        volatility (float): volatility upper limit
+        Returns
+        -------
+        weight (np.array): The optimal weight assignment that minimizes the
+                           volatility for the given set of expected returns.
+        """
+
+        # Number of risky assets plus one riskless
+        n = self.mu.size + 1
+
+        # Inital guess of weights
+        initGuess = np.repeat(1 / n, n)
+
+        length = self.mu.size
+
+        # Constraint for the sum of weights to be equal to 1
+        weightsSumToOne = {
+            "type": "eq",
+            "fun": lambda weights: np.sum(weights) - 1,
+        }
+
+        volatilityLimit = {
+            "type": "ineq",
+            "fun": lambda weights: volatilityUpperLimit -
+                    portfolioVolatility(weights[:length], self.covariance),
+        }
+
+        def negReturn(
+            weights, riskFreeRate, mu,
+        ):
+            """
+            Returns the negative of the sharpe ratio
+            of the given portfolio
+            """
+            r = portfolioReturn(weights[:length], mu)
+
+            return -r - riskFreeRate * weights.item(length)
+
+        weights = opt.minimize(
+            negReturn,
+            initGuess,
+            args=(riskFreeRate, self.mu, ),
+            method="SLSQP",
+            options={"disp": False},
+            constraints=(weightsSumToOne, volatilityLimit,),
+        )
+        return weights
+
     def plotEfficientFrontier(
         self,
         n_points,
@@ -1139,17 +1211,17 @@ class MeanVarianceReturn(object):
         show_gmv=False,
     ):
         """
-        Plots the efficient frontier for the given expected returns 
+        Plots the efficient frontier for the given expected returns
         and covariance matrix.
         Parameters
         ----------
-        n_points (int): The number of equally spaced weights to be 
+        n_points (int): The number of equally spaced weights to be
                         considered
-        style (matplotlib.style): The style to be used for plotting 
+        style (matplotlib.style): The style to be used for plotting
                                     the efficient frontier. Defaults to '.-'.
-        show_cml (bool): Plots the capital market line if set true. 
+        show_cml (bool): Plots the capital market line if set true.
                             Defauts to False.
-        risk_free_rate (float): Risk free rate to be used for plotting 
+        risk_free_rate (float): Risk free rate to be used for plotting
                                 the capital market line. Defualts to 0.0
         show_ew (bool): Plots the equally weghted portfolio point
                             Defauts to False.
@@ -1157,7 +1229,7 @@ class MeanVarianceReturn(object):
                             Defauts to False.
         Returns
         -------
-        matplotlib.plot: The plot of the efficient frontier. 
+        matplotlib.plot: The plot of the efficient frontier.
         """
         weights = self.get_ef_weights(n_points)
 
@@ -1206,25 +1278,24 @@ class MeanVarianceReturn(object):
             )
 
         return ax
-    
+
     def get_ef_weights(self, n_points):
         """
-        Returns a set of optimal weights for n_points equally spaced 
-        target returns from minimum expected return to 
-        maximum expected return. 
-        
+        Returns a set of optimal weights for n_points equally spaced
+        target returns from minimum expected return to
+        maximum expected return.
+
         The weights are a set of weights on the efficient frontier.
         Parameters
         ----------
-        n_points (int): The number of equally spaced weights to be 
+        n_points (int): The number of equally spaced weights to be
                         considered
         Returns
         -------
-        [pd.Series]: The list of n_points equally spaced weights. 
+        [pd.Series]: The list of n_points equally spaced weights.
         """
 
         target_rs = np.linspace(self.mu.min(), self.mu.max(), n_points,)
         weights = [self.minVarianceSolver(target_return) for target_return in target_rs]
 
         return weights
-    
