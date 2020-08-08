@@ -76,7 +76,7 @@ The "corner" in the set $$\{ \bm{x} : \bm{x} \geq \bm{0} \}$$ makes solutions mo
 
 Leverage constraint: $$\displaystyle\sum_{i=1}^d | x_i | \leq 2$$ 
 
-![](../.gitbook/assets/image%20%2865%29.png)
+![](../.gitbook/assets/image%20%2866%29.png)
 
 #### Efficient Frontier with Robust Constraints
 
@@ -122,7 +122,7 @@ Need a product that has **negative exposure and limited liability**
 
 ETFs are exchange traded products that track the returns on stock indices, bond indices, commodities, currencies, etc. 
 
-![](../.gitbook/assets/image%20%2866%29.png)
+![](../.gitbook/assets/image%20%2868%29.png)
 
 ### Leveraged ETFs
 
@@ -188,6 +188,89 @@ $$\text{VaR}_p(L) := p^{th} - \text{quantile* of } L \approx  F_L^{-1} (p)$$
 where $$F_L$$ is the CDF of the random loss $$L.$$ 
 
 $$\text{VaR}_p$$ is increasing in $$p$$ . 
+
+### Conditional Value at Risk
+
+**Definition.** The conditional value at risk $$\text{CVaR}_p(L)$$ of random variable $$L$$ at the confidence level $$p \in (0,1)$$ is defined as 
+
+$$\text{CVaR}_p(L) = \mathbb{E} [L | L \geq \text{VaR}_p(L)] = \cfrac{\int_{\text{VaR}_p(L)}^{\infty} \; xf_L(x)\; dx}{\mathbb{P}(L \geq \text{VaR}_p(L))}$$ 
+
+where $$f_L$$ is the density of the random loss $$L.$$ The features are
+
+* $$\text{CVaR}$$ is also a “tail” risk measure 
+* $$\text{CVaR}_p(L) ≥ \text{VaR}_p(L) $$ 
+* $$\text{CVaR}_p$$ is increasing in $$p$$ 
+* Other names: _Tail conditional expectation_ and _Expected Shortfall_
+
+### VaR and CVaR for Normal Distribution
+
+Suppose $$L \sim N(\mu, \sigma^2)$$ . 
+
+$$\text{VaR}_p (L) = \mu + \sigma \Phi^{-1} (p)$$ 
+
+where $$\Phi$$ is the cumulative distribution function \(CDF\) of a standard Normal with mean 0 and volatility 1. 
+
+$$\text{CVaR}_p(L) = \mu + \sigma\bigg( \cfrac{1}{1-p} \displaystyle\int_p^1 \Phi^{-1} (\beta) \; d\beta \bigg)$$ 
+
+where $$\Phi$$ is the cumulative distribution function \(CDF\) of a standard Normal with mean 0 and volatility 1.
+
+$$\text{VaR}_p$$ and $$\text{CVaR}_p$$ for a Normal random variable **completely** defined by mean $$\mu$$ and volatility $$\sigma$$ .
+
+### VaR and CVaR from samples
+
+Suppose $$L_1, L_2, ..., L_N$$ are $$N$$ independently and identically distributed \(**IID**\) samples from the $$\text{Loss } L$$ . 
+
+ Let $$L_{(1)}, L_{(2)}, ..., L_{(N)}$$ denote the order-statistics \(**ascending** order\) of the $$N$$ samples. 
+
+Let $$K_p = \lceil pN \rceil.$$ 
+
+* $$\text{VaR}_p(L) \approx L_{(K_p)} = K_p$$-th term in the sorted samples
+* $$\text{CVaR}_p(L) \approx \cfrac{1}{(1-p)N} \displaystyle\sum_{k=K_p}^N L_{(k)} \\ \quad \quad \quad \quad \; \; =\text{sum of the largest } N - K_p +1 \text{ samples divided by  } (1-p)N$$ 
+
+### Impact of Return Distribution
+
+**Experiment setup:**
+
+* Computed the Sharpe optimal portfolio for the data in the spreadsheet
+* Generate $$N = 10,000$$ samples of loss $$-r_x$$ for three different distributions
+  * Multivariate Normal with mean $$\bm{\mu}$$ and covariance $$\bm{V}$$ 
+  * Multivariate $$t$$ with $$\nu = 12$$ degree of freedom, mean $$\bm{\mu}$$ , covariance $$\bigg(\cfrac{\nu -2}{\nu} \bigg) \mathbf{V}$$ 
+  * Mixture of Normals $$0.75 \cdot N(\bm{\mu}, (0.76)^2 \cdot \bm{V}) + 0.25 \cdot N(\bm{\mu}, (1.5)^2 \cdot \bm{V})$$ 
+* Used samples to estimate VaR and CVaR
+
+The Students’s t distribution has fatter tails than Normal particularly when the degrees of freedom are small. Expect VaR and CVaR to be larger. 
+
+The Normal distribution with covariance matrix $$(1.5)^2V$$ has all volatilities 50% higher. The mixture models a situation where there is 25% chance of very high volatility. Expect VaR and CVaR to be large. 
+
+* **Loss histogram for Normal returns**
+
+![](../.gitbook/assets/image%20%2869%29.png)
+
+* **Loss histogram for t returns**
+
+![](../.gitbook/assets/image%20%2867%29.png)
+
+* **Loss histogram for mixture of Normals**
+
+![](../.gitbook/assets/image%20%2865%29.png)
+
+### Pros and Cons of VaR
+
+#### Pros
+
+* Captures the tail behaviour of portfolio losses
+* Can be robustly estimated from data: not very susceptible to outliers
+* Captures the tail behaviour of portfolio losses beyond the p-th quantile
+* Sub-additive: diversification reduces CVaR
+* Mean-CVaR portfolio selection problems can be solve very efficiently
+
+#### Cons:
+
+* Only sensitive to the p-th quantile and not the distribution beyond
+* Incentive for “tail stuffing”
+* VaR is not sub-additive: diversification can increase VaR
+* CVaR is defined by an expectation: can be sensitive to outliers
+* We will return to the topic of VaR and CVaR in the risk management module
 
 ## Words
 
