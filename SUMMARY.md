@@ -34,6 +34,7 @@
 * [Week 1 Quiz](financial-engineering-and-risk-management-ii/week-1-quiz.md)
 * [Implementation Difficulties](financial-engineering-and-risk-management-ii/untitled.md)
 * [Statistical Biases and Potential Pitfalls](financial-engineering-and-risk-management-ii/statistical-biases-and-potential-pitfalls.md)
+* [Review of the Binomial Model and the Black-Scholes Model](financial-engineering-and-risk-management-ii/review-of-the-binomial-model-and-the-black-scholes-model.md)
 * [Week 2 Quiz](financial-engineering-and-risk-management-ii/week-2-quiz.md)
 
 ## Book 1 - Foundations of Risk Management
