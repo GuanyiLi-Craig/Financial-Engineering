@@ -111,3 +111,116 @@ $$d_1 = \cfrac{\log(S_0 / K) + (r - c + \sigma^2/2) \cdot T}{\sigma \cdot \sqrt{
 
 and $$N(d)  = \mathbf{P} (N(0,1) \leq d)$$ 
 
+* Note that $$\mu$$ does not appear in the Black-Scholes formula
+  * just as $$p$$ is not used in option pricing calculations for the binomial model
+* Black-Scholes obtained their formula using a similar replicating strategy argument to the one we used for binomial model
+* European put option price, $$P_0$$ , can be calculated from put-call parity
+
+$$P_0 + S_0 \cdot e^{-cT} = C_0 + K\cdot e^{-rT}$$ 
+
+* The Black-Scholes formula is arguably the most important and famous formula in all of finance and economics 
+  * it is used extensively in the financial industry
+  * it has also let to an enormous amount of academic work since it's publication
+* We will see how it is used in practice
+  * but will emphasize now that the GBM model is not a good     approximation to security prices
+  * and everybody knows this!
+
+## The Greeks: Delta and Gamma
+
+### Review Black-Scholes Formula
+
+The Black-Scholes formula for the price of a European call option with strike $$K$$ and expiration $$T$$ 
+
+$$C_0 = S_0 \cdot e^{-cT} \cdot N(d_1) - K\cdot e^{-rT} \cdot N(d_2)$$ 
+
+where 
+
+$$d_1 = \cfrac{\log(S_0 / K) + (r - c + \sigma^2/2) \cdot T}{\sigma \cdot \sqrt{T}} \\ d_2 = d_1 - \sigma \cdot \sqrt{T}$$ 
+
+and $$N(d)  = \mathbf{P} (N(0,1) \leq d)$$ 
+
+Recall that $$r$$ is the risk-free interest rate, $$c$$ is the dividend yield and the stock price $$S_t$$ satisfies 
+
+$$S_t = S_0 \cdot e^{(r - c - \sigma^2/2) t + \sigma W_t}$$ 
+
+where $$W_t$$ is a Brownian motion under $$\mathbb{Q}$$ .
+
+The “**Greeks**” refer to the partial \(mathematical\) derivatives of a \(financial\) derivative security price with respect to the model parameters. 
+
+### Delta $$\delta$$ 
+
+**Definition.** The delta of an option is the partial derivative of the option price with respect to the price of the underlying security.
+
+The delta measures the **sensitivity** of the option price to the price of the underlying security.
+
+The delta of a European call option satisfies
+
+$$\text{delta} = \cfrac{\partial C}{\partial S} = e^{-cT} \cdot \text{N}(d_1)$$ 
+
+* follows from $$C_0 = S_0 \cdot e^{-cT} \cdot N(d_1) - K\cdot e^{-rT} \cdot N(d_2)$$ 
+* although more tedious to calculate than it may appear to be. 
+
+The delta of a European put option is also easily calculated. 
+
+![](../.gitbook/assets/image%20%2880%29.png)
+
+![](../.gitbook/assets/image%20%2874%29.png)
+
+![](../.gitbook/assets/image%20%2876%29.png)
+
+### Gamma $$\gamma$$ 
+
+**Definition.** The **gamma** of an option is the partial derivative of the option’s delta with respect to the price of the underlying security.
+
+Gamma measures the **sensitivity** of the option delta to the price of the underlying security.
+
+The gamma of a call option satisfies
+
+$$\text{gamma} = \cfrac{\partial ^2 C}{\partial S^2} = e^{-cT} \cfrac{\phi (d_1)}{\sigma S\cdot \sqrt{T}}$$ 
+
+where $$\phi(\cdot)$$ is the standard normal PDF
+
+The gamma of a European put option is easily calculated from put-call parity
+
+$$e^{-rT} K + C = e^{-cT} S + P$$ 
+
+Gamma for European options is always positive due to option convexity. 
+
+![](../.gitbook/assets/image%20%2875%29.png)
+
+![](../.gitbook/assets/image%20%2882%29.png)
+
+### Vega  
+
+**Definition.** The vega of an option is the partial derivative of the option price with respect to the volatility parameter, $$\sigma$$ .
+
+Vega therefore measures the sensitivity of the option price to $$\sigma$$ .
+
+The vega of a call option satisfies
+
+$$\text{vega} = \cfrac{\partial C}{ \partial \sigma} = e^{-cT} S \cdot \sqrt{T} \cdot \phi(d_1)$$ 
+
+where $$\phi(\cdot)$$ is the PDF standard normal random variable.
+
+The vega of a European put option is easily calculated from put-call parity
+
+$$e^{-rT} K + C = e^{-cT} S + P$$ 
+
+![](../.gitbook/assets/image%20%2877%29.png)
+
+![](../.gitbook/assets/image%20%2881%29.png)
+
+### Theta $$\theta$$ 
+
+**Definition.** The theta of an option is the **negative** of the partial derivative of the option price with respect to time-to-maturity. 
+
+The theta of an option is therefore the sensitivity of the option price to a negative change in time-to-maturity. It satisfies
+
+$$\text{theta} = -\cfrac{\partial C}{\partial T} = -e^{-cT} S \cdot \phi(d_1) \cfrac{\sigma}{2\sqrt{T}} + c\cdot e^{-cT} S \text{N}(d_1) - r\cdot K \cdot e^{-rT} \text{N}(d_2)$$ 
+
+where $$\phi(\cdot)$$ is the standard normal PDF.
+
+![](../.gitbook/assets/image%20%2878%29.png)
+
+![](../.gitbook/assets/image%20%2873%29.png)
+
