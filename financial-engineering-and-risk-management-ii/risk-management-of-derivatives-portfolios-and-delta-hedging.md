@@ -148,3 +148,36 @@ Options with lower strikes tend to have higher implied volatilities
 
 * for a given maturity, $$T$$ , this feature is typically referred to as the **volatility skew** or **smile**.
 
+For a given strike, $$K$$ , the implied volatility can be either increasing or decreasing with time-to-maturity
+
+* in general $$\sigma(K,T)$$ converges to a constant as $$T \to \infty$$ 
+* for $$T$$ small often observe an inverted volatility surface with short-term   options having much higher volatilities than longer-term options
+  * this is particularly true in times of market stress.
+
+Single-stock options are generally **American** and in this case, call and put options typically give rise to different surfaces.
+
+The fact that the volatility surface is not constant emphasizes just how wrong Black-Scholes is
+
+* but every equity and FX derivatives trading desk computes the   Black-Scholes implied volatility surface
+* and the “Greeks” are computed \(and used\) using Black-Scholes
+* use of the BS formula is often likened to “_using the wrong number in the   wrong formula to obtain the right price_”!
+
+### Arbitrage Constraints on the Volatility Surface
+
+The shape of the implied volatility surface is constrained by the absence of arbitrage. In particular:
+
+1. Must have $$\sigma (K, T) ≥ 0$$ for all strikes $$K$$ and expirations $$T$$ .
+2. At any given maturity, $$T$$ , the skew cannot be too steep
+   1. otherwise arbitrage opportunities, e.g. put-spread arbitrage, will exist.
+3. Likewise the term structure of implied volatility cannot be too inverted
+   1. otherwise calendar spread arbitrages will exist.
+
+In practice the implied volatility surface will not violate any of these restrictions
+
+* otherwise there would be an arbitrage in the market.
+
+These restrictions can be difficult to enforce, however, when we are stressing the volatility surface
+
+* a task that is commonly performed for risk management purposes
+* recall our earlier discussion on scenario analysis.
+
