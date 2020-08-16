@@ -38,6 +38,8 @@
 * [Review of the Binomial Model and the Black-Scholes Model](financial-engineering-and-risk-management-ii/review-of-the-binomial-model-and-the-black-scholes-model.md)
 * [Risk Management of Derivatives Portfolios and Delta-Hedging](financial-engineering-and-risk-management-ii/risk-management-of-derivatives-portfolios-and-delta-hedging.md)
 * [Week 3 Quiz](financial-engineering-and-risk-management-ii/week-3-quiz.md)
+* [Equity Derivatives in Practice](financial-engineering-and-risk-management-ii/equity-derivatives-in-practice.md)
+* [Untitled](financial-engineering-and-risk-management-ii/untitled-1.md)
 * [Week 5 Quiz](financial-engineering-and-risk-management-ii/week-5-quiz.md)
 
 ## Book 1 - Foundations of Risk Management
