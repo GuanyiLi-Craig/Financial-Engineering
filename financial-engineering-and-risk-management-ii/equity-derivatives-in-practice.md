@@ -118,9 +118,33 @@ This is an example of how the Black-Scholes “technology” is used in practice
 
 ### An Example from Gatheral’s “The Volatility Surface”
 
+Suppose $$r = c = 0, T= 1$$ year, $$S_0 = 100$$ and $$K = 100$$ so the digital is at-the-money.
 
+Suppose also that the skew is $$2.5\%$$ per $$10\%$$ change in strike and $$\sigma_{atm} = 25\%$$ .
+
+Letting $$\phi(\cdot)$$ be the PDF of a standard normal random variable we then have
+
+$$D(100, 1) = \text{N}\bigg( -\cfrac{\sigma_{atm}}{2} \bigg) - S_0 \cdot \phi\bigg( \cfrac{\sigma_{atm}}{2}  \bigg) \cdot \cfrac{- 0.025}{0.1 \cdot S_0} \\ \quad \quad = \text{N}\bigg( -\cfrac{\sigma_{atm}}{2}  \bigg) + 0.25 \phi \bigg( \cfrac{\sigma_{atm}}{2}  \bigg) \\ \quad \quad \approx 0.45 + 0.25 \times 0.4 \\ \quad \quad = 0.55$$ 
+
+Therefore the digital price = 55% of notional when priced correctly.
+
+If we ignored the skew and just computed the Black-Scholes digital price using the ATM implied volatility, the price would have been 45% of notional
+
+* which is significantly less than the correct price.
 
 ### Pricing a Range Accrual
+
+Consider a 3-month range accrual on the S&P 500 index with range 1, 500 to 1, 550.
+
+After 3 months the product pays X% of notional where 
+
+$$X = \%$$ of days over the 3 months that index is inside the range. 
+
+For example, if the notional is $10M and the index is inside the range 70% of the time, then the payoff is $7M.
+
+**Question:** Is it possible to calculate the price of this range accrual using the volatility surface?
+
+**Answer:** Yes. Consider a portfolio consisting of a pair of digitals for each date between now and the expiration.
 
 ## Beyond the Volatility Surface and Black-Scholes
 
