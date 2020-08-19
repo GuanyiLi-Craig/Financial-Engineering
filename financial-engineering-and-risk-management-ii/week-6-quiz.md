@@ -10,6 +10,8 @@ In this quiz we want to compute the value of the enhancement option when the enh
 
 Compute the time t=0 value of the mine when the enhancement is already in place.
 
+
+
 ## Quiz 2
 
 Compute the time t=0 value of the mine when the lease enhancement is not in place but you do have the option to perform the enhancement, i.e. install the new equipment, at the beginning of the fifth year or any later point in the lifetime of the lease.
