@@ -41,6 +41,7 @@
 * [Equity Derivatives in Practice](financial-engineering-and-risk-management-ii/equity-derivatives-in-practice.md)
 * [Untitled](financial-engineering-and-risk-management-ii/untitled-1.md)
 * [Week 5 Quiz](financial-engineering-and-risk-management-ii/week-5-quiz.md)
+* [Week 6 Quiz](financial-engineering-and-risk-management-ii/week-6-quiz.md)
 
 ## Book 1 - Foundations of Risk Management
 
