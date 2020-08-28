@@ -612,6 +612,122 @@ class SwapsPricing(Lattice):
         self.r = r
 
         self._constructTree(r)
+        
+class LeasePrice(Lattice):
+    """
+        Implements a lease value model based on binomial tree model.
+        Inherits the Lattice class.
+        Assumes the number of periods is equal to the length of the dirft vector - 1.
+
+        price[n, j] = 0
+        price[i, j] = produce * (lattice[i,j] - cost) / interestRate + (q * price[i+1][j+1] + (1-q)*price[i+1][j]) / interestRate
+        Parameters:
+        ----------
+        n: int
+            The number of periods.
+        produce: float
+            The total quantity can produce per time period
+        cost: float
+            The cost per produced unit
+        interestRate: float
+            Fixed interest rate
+        q: float
+            risk-neutral probability
+    """
+    __doc__ += Lattice.__doc__
+
+    @property
+    def produce(self):
+        return self._produce
+
+    @produce.setter
+    def produce(self, val):
+        self._produce = val
+        
+    @property
+    def cost(self):
+        return self._cost
+
+    @cost.setter
+    def cost(self, val):
+        self._cost = val
+        
+    @property
+    def interestRate(self):
+        return self._interestRate
+
+    @interestRate.setter
+    def interestRate(self, val):
+        self._interestRate = val
+        
+    @property
+    def q(self):
+        return self._q
+
+    @q.setter
+    def q(self, val):
+        self._q = val
+        
+    @property
+    def lattice(self):
+        return self._lattice
+    
+    @lattice.setter
+    def lattice(self, val):
+        self._lattice = val
+        
+    @property
+    def price(self):
+        return self.tree[0, 0]
+    
+    def adjustPrice(self, equipCost):
+        adjustTree = np.zeros([self.T + 1, self.T + 1])
+        for i in range(self.T-1, -1, -1):
+            for j in range(i + 1):
+                childd = adjustTree[i + 1, j]
+                childu = adjustTree[i + 1, j + 1]
+                
+                value = (self.q * childu + (1 - self.q) * childd) / self.interestRate + self.produce * (self.lattice.tree[i, j] - self.cost) / self.interestRate
+                
+                adjustTree[i, j] = value if (self.tree[i, j] - equipCost) < value else (self.tree[i, j] - equipCost)
+                
+        return adjustTree
+
+    def _constructTree(self, lattice, newProduce = None, newCost = None, period = None):
+        """
+        Constructs the binomial tree for pricing the lease.
+        """
+        priceLattice = lattice.tree
+
+        for i in range(self.T-1, -1, -1):
+            for j in range(i + 1):
+                childd = self.tree[i + 1, j]
+                childu = self.tree[i + 1, j + 1]
+   
+                if period is not None and i >= period:
+                    value = (self.q * childu + (1 - self.q) * childd) / self.interestRate + newProduce * (priceLattice[i][j] - newCost) / self.interestRate
+                else:
+                    value = (self.q * childu + (1 - self.q) * childd) / self.interestRate + self.produce * (priceLattice[i][j] - self.cost) / self.interestRate
+
+                self.tree[i, j] = value if value >= self.cost else 0
+
+    def __init__(self, n, q, produce, interestRate, cost, lattice, newProduce = None, newCost = None, period = None):
+        """
+        Initializes the model based on the given parameters.
+        """
+
+        super().__init__(n, q)
+
+        self.produce = produce
+
+        self.interestRate = interestRate
+
+        self.cost = cost
+
+        self.lattice = lattice
+
+        self._constructTree(lattice, newProduce, newCost, period)
+    
 
 class BDTRate(Lattice):
     """
